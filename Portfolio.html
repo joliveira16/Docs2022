@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/Teaching/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/Teaching/"><img id="fsdocs-logo" src="/Teaching/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/nhirschey/Teaching">Source Repository</a></li>
+                <li class="nav-header">
+  Getting Started
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header">
+  Lectures
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/portfolio-returns.html">
+    Portfolio Returns
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-header">
+  Assignments
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-header">
+  Practice Quizzes
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/fundamentals-PracticeQuiz.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/volatilityTiming-PracticeQuiz.html">
+    Volatility Timing Part 1
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/volatilityTiming-PracticeQuiz-2.html">
+    Volatility Timing Part 2
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/Option-Match-Map-practiceQuiz.html">
+    Option Match Map
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/discriminatedUnion-practiceQuiz.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/portfolios-PracticeQuiz.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/factors-practiceQuiz.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-header">
+  Other
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Price momentum
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/Teaching/">Teaching</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Last updated 2021-04-29 09:00</span>
+<span class="k">module</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="m">Portfolio</span>
+
+<span class="pp">#r</span> <span class="s">&quot;nuget: NodaTime&quot;</span>
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">System</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">NodaTime</span>
+
+<span class="c">/// Misc</span>
+<span class="c">/// </span>
+
+<span class="c">// Type extension until NodaTime puts YearMonth.PlusMonths() in the nuget version.</span>
+<span class="c">// taken from here in the NodaTime repo until it is accessible</span>
+<span class="c">// https://github.com/carlosschults/nodatime/blob/43e9f24c2ba5a7ed0fd145c082d9e63cd50b1149/src/NodaTime/YearMonth.cs#L156</span>
+<span class="c">// See https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/type-extensions</span>
+<span class="c">// to understand type extensions.</span>
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="vt">YearMonth</span> <span class="k">with</span>
+    <span class="k">member</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="fn">this</span><span class="pn">.</span><span class="fn">PlusMonths</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="fn">months</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="vt">int</span><span class="pn">)</span> <span class="o">=</span>
+                <span onmouseout="hideTip(event, 'fs5', 8)" onmouseover="showTip(event, 'fs5', 8)" class="fn">this</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="id">OnDayOfMonth</span><span class="pn">(</span><span class="n">1</span><span class="pn">)</span><span class="pn">.</span><span class="id">PlusMonths</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs6', 10)" onmouseover="showTip(event, 'fs6', 10)" class="fn">months</span><span class="pn">)</span><span class="pn">.</span><span class="id">ToYearMonth</span><span class="pn">(</span><span class="pn">)</span>
+<span class="c">///</span>
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="rt">SecurityId</span> <span class="o">=</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="uc">Ticker</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="rt">string</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs12', 14)" onmouseover="showTip(event, 'fs12', 14)" class="uc">Cusip</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="rt">string</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="uc">Bloomberg</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs11', 17)" onmouseover="showTip(event, 'fs11', 17)" class="rt">string</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs14', 18)" onmouseover="showTip(event, 'fs14', 18)" class="uc">Permno</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs7', 19)" onmouseover="showTip(event, 'fs7', 19)" class="vt">int</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs15', 20)" onmouseover="showTip(event, 'fs15', 20)" class="uc">Other</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs11', 21)" onmouseover="showTip(event, 'fs11', 21)" class="rt">string</span>
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs16', 22)" onmouseover="showTip(event, 'fs16', 22)" class="rt">InvestmentUniverse</span> <span class="o">=</span> 
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs17', 23)" onmouseover="showTip(event, 'fs17', 23)" class="prop">FormationMonth</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs4', 24)" onmouseover="showTip(event, 'fs4', 24)" class="vt">YearMonth</span> 
+      <span onmouseout="hideTip(event, 'fs18', 25)" onmouseover="showTip(event, 'fs18', 25)" class="prop">Securities</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs9', 26)" onmouseover="showTip(event, 'fs9', 26)" class="rt">SecurityId</span> <span onmouseout="hideTip(event, 'fs19', 27)" onmouseover="showTip(event, 'fs19', 27)" class="rt">list</span> <span class="pn">}</span>
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs20', 28)" onmouseover="showTip(event, 'fs20', 28)" class="rt">SecuritySignal</span> <span class="o">=</span> 
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs21', 29)" onmouseover="showTip(event, 'fs21', 29)" class="prop">SecurityId</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs9', 30)" onmouseover="showTip(event, 'fs9', 30)" class="rt">SecurityId</span>
+      <span onmouseout="hideTip(event, 'fs22', 31)" onmouseover="showTip(event, 'fs22', 31)" class="prop">Signal</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs23', 32)" onmouseover="showTip(event, 'fs23', 32)" class="vt">float</span> <span class="pn">}</span>
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs24', 33)" onmouseover="showTip(event, 'fs24', 33)" class="rt">SecuritiesWithSignals</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs25', 34)" onmouseover="showTip(event, 'fs25', 34)" class="prop">FormationMonth</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs4', 35)" onmouseover="showTip(event, 'fs4', 35)" class="vt">YearMonth</span> 
+      <span onmouseout="hideTip(event, 'fs26', 36)" onmouseover="showTip(event, 'fs26', 36)" class="prop">Signals</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs20', 37)" onmouseover="showTip(event, 'fs20', 37)" class="rt">SecuritySignal</span> <span onmouseout="hideTip(event, 'fs19', 38)" onmouseover="showTip(event, 'fs19', 38)" class="rt">list</span> <span class="pn">}</span>
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs27', 39)" onmouseover="showTip(event, 'fs27', 39)" class="rt">PortfolioId</span> <span class="o">=</span> 
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs28', 40)" onmouseover="showTip(event, 'fs28', 40)" class="uc">Named</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs11', 41)" onmouseover="showTip(event, 'fs11', 41)" class="rt">string</span>
+    <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs29', 42)" onmouseover="showTip(event, 'fs29', 42)" class="uc">Indexed</span> <span class="k">of</span> <span class="prop">name</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs11', 43)" onmouseover="showTip(event, 'fs11', 43)" class="rt">string</span> <span class="pn">*</span> <span class="prop">index</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs7', 44)" onmouseover="showTip(event, 'fs7', 44)" class="vt">int</span>
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs30', 45)" onmouseover="showTip(event, 'fs30', 45)" class="rt">AssignedPortfolio</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs31', 46)" onmouseover="showTip(event, 'fs31', 46)" class="prop">PortfolioId</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs27', 47)" onmouseover="showTip(event, 'fs27', 47)" class="rt">PortfolioId</span>
+      <span onmouseout="hideTip(event, 'fs32', 48)" onmouseover="showTip(event, 'fs32', 48)" class="prop">FormationMonth</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs4', 49)" onmouseover="showTip(event, 'fs4', 49)" class="vt">YearMonth</span> 
+      <span onmouseout="hideTip(event, 'fs33', 50)" onmouseover="showTip(event, 'fs33', 50)" class="prop">Signals</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs20', 51)" onmouseover="showTip(event, 'fs20', 51)" class="rt">SecuritySignal</span> <span onmouseout="hideTip(event, 'fs19', 52)" onmouseover="showTip(event, 'fs19', 52)" class="rt">list</span> <span class="pn">}</span>
+
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs34', 53)" onmouseover="showTip(event, 'fs34', 53)" class="fn">assignSignalSort</span> <span onmouseout="hideTip(event, 'fs35', 54)" onmouseover="showTip(event, 'fs35', 54)" class="fn">name</span> <span onmouseout="hideTip(event, 'fs36', 55)" onmouseover="showTip(event, 'fs36', 55)" class="fn">n</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs37', 56)" onmouseover="showTip(event, 'fs37', 56)" class="fn">xs</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs24', 57)" onmouseover="showTip(event, 'fs24', 57)" class="rt">SecuritiesWithSignals</span><span class="pn">)</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs37', 58)" onmouseover="showTip(event, 'fs37', 58)" class="fn">xs</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs26', 59)" onmouseover="showTip(event, 'fs26', 59)" class="id">Signals</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs38', 60)" onmouseover="showTip(event, 'fs38', 60)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs39', 61)" onmouseover="showTip(event, 'fs39', 61)" class="id">sortBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs40', 62)" onmouseover="showTip(event, 'fs40', 62)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs40', 63)" onmouseover="showTip(event, 'fs40', 63)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 64)" onmouseover="showTip(event, 'fs22', 64)" class="id">Signal</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs38', 65)" onmouseover="showTip(event, 'fs38', 65)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs41', 66)" onmouseover="showTip(event, 'fs41', 66)" class="id">splitInto</span> <span onmouseout="hideTip(event, 'fs36', 67)" onmouseover="showTip(event, 'fs36', 67)" class="fn">n</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs38', 68)" onmouseover="showTip(event, 'fs38', 68)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs42', 69)" onmouseover="showTip(event, 'fs42', 69)" class="id">mapi</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs43', 70)" onmouseover="showTip(event, 'fs43', 70)" class="fn">i</span> <span onmouseout="hideTip(event, 'fs44', 71)" onmouseover="showTip(event, 'fs44', 71)" class="fn">ys</span> <span class="k">-&gt;</span> 
+        <span class="c">// because lists are 0-indexed and I want the minimum</span>
+        <span class="c">// portfolio index to be 1, I&#39;m doing index = i+1.</span>
+        <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs27', 72)" onmouseover="showTip(event, 'fs27', 72)" class="prop">PortfolioId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 73)" onmouseover="showTip(event, 'fs29', 73)" class="uc">Indexed</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs35', 74)" onmouseover="showTip(event, 'fs35', 74)" class="prop">name</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs35', 75)" onmouseover="showTip(event, 'fs35', 75)" class="fn">name</span><span class="pn">,</span><span class="prop">index</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs43', 76)" onmouseover="showTip(event, 'fs43', 76)" class="fn">i</span><span class="o">+</span><span class="n">1</span><span class="pn">)</span>
+          <span class="prop">FormationMonth</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs37', 77)" onmouseover="showTip(event, 'fs37', 77)" class="fn">xs</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 78)" onmouseover="showTip(event, 'fs25', 78)" class="id">FormationMonth</span>
+          <span class="prop">Signals</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs44', 79)" onmouseover="showTip(event, 'fs44', 79)" class="fn">ys</span> <span class="pn">}</span><span class="pn">)</span>
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs45', 80)" onmouseover="showTip(event, 'fs45', 80)" class="rt">Position</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs46', 81)" onmouseover="showTip(event, 'fs46', 81)" class="prop">SecurityId</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs9', 82)" onmouseover="showTip(event, 'fs9', 82)" class="rt">SecurityId</span> 
+      <span onmouseout="hideTip(event, 'fs47', 83)" onmouseover="showTip(event, 'fs47', 83)" class="prop">Weight</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs23', 84)" onmouseover="showTip(event, 'fs23', 84)" class="vt">float</span> <span class="pn">}</span>
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs48', 85)" onmouseover="showTip(event, 'fs48', 85)" class="rt">Portfolio</span> <span class="o">=</span> 
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs49', 86)" onmouseover="showTip(event, 'fs49', 86)" class="prop">PortfolioId</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs27', 87)" onmouseover="showTip(event, 'fs27', 87)" class="rt">PortfolioId</span>
+      <span onmouseout="hideTip(event, 'fs50', 88)" onmouseover="showTip(event, 'fs50', 88)" class="prop">FormationMonth</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs4', 89)" onmouseover="showTip(event, 'fs4', 89)" class="vt">YearMonth</span>
+      <span onmouseout="hideTip(event, 'fs51', 90)" onmouseover="showTip(event, 'fs51', 90)" class="prop">Positions</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs45', 91)" onmouseover="showTip(event, 'fs45', 91)" class="rt">Position</span> <span onmouseout="hideTip(event, 'fs19', 92)" onmouseover="showTip(event, 'fs19', 92)" class="rt">list</span> <span class="pn">}</span>
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs52', 93)" onmouseover="showTip(event, 'fs52', 93)" class="rt">PortfolioReturn</span> <span class="o">=</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs53', 94)" onmouseover="showTip(event, 'fs53', 94)" class="prop">PortfolioId</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs27', 95)" onmouseover="showTip(event, 'fs27', 95)" class="rt">PortfolioId</span>
+      <span onmouseout="hideTip(event, 'fs54', 96)" onmouseover="showTip(event, 'fs54', 96)" class="prop">YearMonth</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs4', 97)" onmouseover="showTip(event, 'fs4', 97)" class="vt">YearMonth</span>
+      <span onmouseout="hideTip(event, 'fs55', 98)" onmouseover="showTip(event, 'fs55', 98)" class="prop">Return</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs23', 99)" onmouseover="showTip(event, 'fs23', 99)" class="vt">float</span> <span class="pn">}</span>
+
+<span class="c">// This type alias defines the type of a function that has</span>
+<span class="c">// a tuple input of SecurityId * YearMonth and outputs</span>
+<span class="c">// a (SecurityId * float) Option. Think of it like</span>
+<span class="c">// using types to write documentation of the functions.</span>
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs56', 100)" onmouseover="showTip(event, 'fs56', 100)" class="fn">GetsMarketCaps</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs9', 101)" onmouseover="showTip(event, 'fs9', 101)" class="rt">SecurityId</span> <span class="pn">*</span> <span onmouseout="hideTip(event, 'fs4', 102)" onmouseover="showTip(event, 'fs4', 102)" class="vt">YearMonth</span> <span class="k">-&gt;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs9', 103)" onmouseover="showTip(event, 'fs9', 103)" class="rt">SecurityId</span> <span class="pn">*</span> <span onmouseout="hideTip(event, 'fs23', 104)" onmouseover="showTip(event, 'fs23', 104)" class="vt">float</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs57', 105)" onmouseover="showTip(event, 'fs57', 105)" class="rt">Option</span>
+
+<span class="c">// Defining this type alias makes it easier to read the type of the function that I want for</span>
+<span class="c">// marketCapGetter in the function that I have below. Otherwise it might look something like</span>
+<span class="c">// let giveValueWeights (marketCapGetter: (SecurityId * YearMonth -&gt; (SecurityId * float) Option) ...</span>
+<span class="c">// which is the same thing but not as clear what we&#39;re trying to do.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs58', 106)" onmouseover="showTip(event, 'fs58', 106)" class="fn">giveValueWeights</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs59', 107)" onmouseover="showTip(event, 'fs59', 107)" class="fn">marketCapGetter</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs56', 108)" onmouseover="showTip(event, 'fs56', 108)" class="fn">GetsMarketCaps</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs60', 109)" onmouseover="showTip(event, 'fs60', 109)" class="fn">x</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs30', 110)" onmouseover="showTip(event, 'fs30', 110)" class="rt">AssignedPortfolio</span><span class="pn">)</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs61', 111)" onmouseover="showTip(event, 'fs61', 111)" class="fn">mktCaps</span> <span class="o">=</span>
+        <span onmouseout="hideTip(event, 'fs60', 112)" onmouseover="showTip(event, 'fs60', 112)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 113)" onmouseover="showTip(event, 'fs33', 113)" class="id">Signals</span>
+        <span class="c">// List.choose throws away None results, so this means </span>
+        <span class="c">// that if the market cap getter returns None</span>
+        <span class="c">// then we will not have that security in our portfolio.</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs38', 114)" onmouseover="showTip(event, 'fs38', 114)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs62', 115)" onmouseover="showTip(event, 'fs62', 115)" class="id">choose</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs63', 116)" onmouseover="showTip(event, 'fs63', 116)" class="fn">signal</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs59', 117)" onmouseover="showTip(event, 'fs59', 117)" class="fn">marketCapGetter</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs63', 118)" onmouseover="showTip(event, 'fs63', 118)" class="fn">signal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs64', 119)" onmouseover="showTip(event, 'fs64', 119)" class="id">SecurityId</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs60', 120)" onmouseover="showTip(event, 'fs60', 120)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 121)" onmouseover="showTip(event, 'fs32', 121)" class="id">FormationMonth</span><span class="pn">)</span><span class="pn">)</span>
+
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs65', 122)" onmouseover="showTip(event, 'fs65', 122)" class="fn">totMktCap</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs61', 123)" onmouseover="showTip(event, 'fs61', 123)" class="fn">mktCaps</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs38', 124)" onmouseover="showTip(event, 'fs38', 124)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs66', 125)" onmouseover="showTip(event, 'fs66', 125)" class="id">sumBy</span> <span onmouseout="hideTip(event, 'fs67', 126)" onmouseover="showTip(event, 'fs67', 126)" class="fn">snd</span>
+
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs68', 127)" onmouseover="showTip(event, 'fs68', 127)" class="fn">pos</span> <span class="o">=</span>
+        <span onmouseout="hideTip(event, 'fs61', 128)" onmouseover="showTip(event, 'fs61', 128)" class="fn">mktCaps</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs38', 129)" onmouseover="showTip(event, 'fs38', 129)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs69', 130)" onmouseover="showTip(event, 'fs69', 130)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs70', 131)" onmouseover="showTip(event, 'fs70', 131)" class="fn">id</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs71', 132)" onmouseover="showTip(event, 'fs71', 132)" class="fn">mktCap</span><span class="pn">)</span> <span class="k">-&gt;</span>
+            <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs9', 133)" onmouseover="showTip(event, 'fs9', 133)" class="prop">SecurityId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs70', 134)" onmouseover="showTip(event, 'fs70', 134)" class="fn">id</span> 
+              <span class="prop">Weight</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs71', 135)" onmouseover="showTip(event, 'fs71', 135)" class="fn">mktCap</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs65', 136)" onmouseover="showTip(event, 'fs65', 136)" class="fn">totMktCap</span> <span class="pn">}</span><span class="pn">)</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs27', 137)" onmouseover="showTip(event, 'fs27', 137)" class="prop">PortfolioId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs60', 138)" onmouseover="showTip(event, 'fs60', 138)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs72', 139)" onmouseover="showTip(event, 'fs72', 139)" class="id">PortfolioId</span>
+      <span class="prop">FormationMonth</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs60', 140)" onmouseover="showTip(event, 'fs60', 140)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 141)" onmouseover="showTip(event, 'fs32', 141)" class="id">FormationMonth</span> 
+      <span class="prop">Positions</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs68', 142)" onmouseover="showTip(event, 'fs68', 142)" class="fn">pos</span> <span class="pn">}</span>
+
+<span class="c">// This type alias defines the type of a function that has</span>
+<span class="c">// a tuple input of SecurityId * YearMonth and outputs</span>
+<span class="c">// a (SecurityId * float). Think of it like</span>
+<span class="c">// using types to write documentation of the functions.</span>
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs73', 143)" onmouseover="showTip(event, 'fs73', 143)" class="fn">GetsReturn</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs9', 144)" onmouseover="showTip(event, 'fs9', 144)" class="rt">SecurityId</span> <span class="pn">*</span> <span onmouseout="hideTip(event, 'fs4', 145)" onmouseover="showTip(event, 'fs4', 145)" class="vt">YearMonth</span> <span class="k">-&gt;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs9', 146)" onmouseover="showTip(event, 'fs9', 146)" class="rt">SecurityId</span> <span class="pn">*</span> <span onmouseout="hideTip(event, 'fs23', 147)" onmouseover="showTip(event, 'fs23', 147)" class="vt">float</span><span class="pn">)</span>
+
+<span class="c">// Defining this type alias makes it easier to read the type of the function that I want for</span>
+<span class="c">// marketCapGetter in the function that I have below. Otherwise it might look something like</span>
+<span class="c">// let giveValueWeights (marketCapGetter: (SecurityId * YearMonth -&gt; (SecurityId * float) Option) ...</span>
+<span class="c">// which is the same thing but not as clear what we&#39;re trying to do.</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs74', 148)" onmouseover="showTip(event, 'fs74', 148)" class="fn">getPortfolioReturn</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs75', 149)" onmouseover="showTip(event, 'fs75', 149)" class="fn">returnGetter</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs73', 150)" onmouseover="showTip(event, 'fs73', 150)" class="fn">GetsReturn</span><span class="pn">)</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs76', 151)" onmouseover="showTip(event, 'fs76', 151)" class="fn">x</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs48', 152)" onmouseover="showTip(event, 'fs48', 152)" class="rt">Portfolio</span><span class="pn">)</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs77', 153)" onmouseover="showTip(event, 'fs77', 153)" class="fn">returnMonth</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs76', 154)" onmouseover="showTip(event, 'fs76', 154)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 155)" onmouseover="showTip(event, 'fs50', 155)" class="prop">FormationMonth</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs78', 156)" onmouseover="showTip(event, 'fs78', 156)" class="id">PlusMonths</span><span class="pn">(</span><span class="n">1</span><span class="pn">)</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs79', 157)" onmouseover="showTip(event, 'fs79', 157)" class="fn">portRet</span> <span class="o">=</span>
+        <span onmouseout="hideTip(event, 'fs76', 158)" onmouseover="showTip(event, 'fs76', 158)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 159)" onmouseover="showTip(event, 'fs51', 159)" class="id">Positions</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs38', 160)" onmouseover="showTip(event, 'fs38', 160)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs66', 161)" onmouseover="showTip(event, 'fs66', 161)" class="id">sumBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs80', 162)" onmouseover="showTip(event, 'fs80', 162)" class="fn">pos</span> <span class="k">-&gt;</span> 
+            <span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs81', 163)" onmouseover="showTip(event, 'fs81', 163)" class="id">_id</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs82', 164)" onmouseover="showTip(event, 'fs82', 164)" class="fn">ret</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs75', 165)" onmouseover="showTip(event, 'fs75', 165)" class="fn">returnGetter</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs80', 166)" onmouseover="showTip(event, 'fs80', 166)" class="fn">pos</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs83', 167)" onmouseover="showTip(event, 'fs83', 167)" class="id">SecurityId</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs77', 168)" onmouseover="showTip(event, 'fs77', 168)" class="fn">returnMonth</span><span class="pn">)</span>
+            <span onmouseout="hideTip(event, 'fs80', 169)" onmouseover="showTip(event, 'fs80', 169)" class="fn">pos</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs47', 170)" onmouseover="showTip(event, 'fs47', 170)" class="id">Weight</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs82', 171)" onmouseover="showTip(event, 'fs82', 171)" class="fn">ret</span><span class="pn">)</span>
+    <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs27', 172)" onmouseover="showTip(event, 'fs27', 172)" class="prop">PortfolioId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs76', 173)" onmouseover="showTip(event, 'fs76', 173)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs84', 174)" onmouseover="showTip(event, 'fs84', 174)" class="id">PortfolioId</span>
+      <span onmouseout="hideTip(event, 'fs4', 175)" onmouseover="showTip(event, 'fs4', 175)" class="prop">YearMonth</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs77', 176)" onmouseover="showTip(event, 'fs77', 176)" class="fn">returnMonth</span>
+      <span class="prop">Return</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs79', 177)" onmouseover="showTip(event, 'fs79', 177)" class="fn">portRet</span> <span class="pn">}</span>
+
+
+<span class="c">/// This function takes a sample start and sample end</span>
+<span class="c">/// and returns a list with all months from start to end.</span>
+<span class="c">/// Don&#39;t worry about understanding what this function does.</span>
+<span class="c">/// The details are beyond the scope of the class, but if you&#39;re</span>
+<span class="c">/// curious it&#39;s a recursive function:</span>
+<span class="c">/// https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/functions/recursive-functions-the-rec-keyword</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs85', 178)" onmouseover="showTip(event, 'fs85', 178)" class="fn">getSampleMonths</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs86', 179)" onmouseover="showTip(event, 'fs86', 179)" class="fn">sampleStart</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs4', 180)" onmouseover="showTip(event, 'fs4', 180)" class="vt">YearMonth</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs87', 181)" onmouseover="showTip(event, 'fs87', 181)" class="fn">sampleEnd</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs4', 182)" onmouseover="showTip(event, 'fs4', 182)" class="vt">YearMonth</span><span class="pn">)</span> <span class="o">=</span>
+    <span class="k">if</span> <span onmouseout="hideTip(event, 'fs87', 183)" onmouseover="showTip(event, 'fs87', 183)" class="fn">sampleEnd</span> <span class="o">&lt;=</span> <span onmouseout="hideTip(event, 'fs86', 184)" onmouseover="showTip(event, 'fs86', 184)" class="fn">sampleStart</span> <span class="k">then</span> <span onmouseout="hideTip(event, 'fs88', 185)" onmouseover="showTip(event, 'fs88', 185)" class="fn">failwith</span> <span class="s">&quot;sampleEnd should be after sampleStart&quot;</span>
+    <span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs89', 186)" onmouseover="showTip(event, 'fs89', 186)" class="fn">loop</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs87', 187)" onmouseover="showTip(event, 'fs87', 187)" class="fn">sampleEnd</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs4', 188)" onmouseover="showTip(event, 'fs4', 188)" class="vt">YearMonth</span><span class="pn">)</span> <span onmouseout="hideTip(event, 'fs90', 189)" onmouseover="showTip(event, 'fs90', 189)" class="fn">window</span> <span class="o">=</span> 
+        <span class="k">match</span> <span onmouseout="hideTip(event, 'fs90', 190)" onmouseover="showTip(event, 'fs90', 190)" class="fn">window</span> <span class="k">with</span>
+        <span class="pn">|</span> <span class="pn">[</span><span class="pn">]</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs88', 191)" onmouseover="showTip(event, 'fs88', 191)" class="fn">failwith</span> <span class="s">&quot;Need a starting point&quot;</span>
+        <span class="pn">|</span> <span onmouseout="hideTip(event, 'fs91', 192)" onmouseover="showTip(event, 'fs91', 192)" class="fn">lastMonth</span><span class="uc">::</span><span onmouseout="hideTip(event, 'fs92', 193)" onmouseover="showTip(event, 'fs92', 193)" class="id">_monthsBeforeThat</span> <span class="k">-&gt;</span>
+            <span class="k">if</span> <span onmouseout="hideTip(event, 'fs91', 194)" onmouseover="showTip(event, 'fs91', 194)" class="fn">lastMonth</span> <span class="o">&lt;</span> <span onmouseout="hideTip(event, 'fs87', 195)" onmouseover="showTip(event, 'fs87', 195)" class="fn">sampleEnd</span> <span class="k">then</span> 
+                <span onmouseout="hideTip(event, 'fs89', 196)" onmouseover="showTip(event, 'fs89', 196)" class="fn">loop</span> <span onmouseout="hideTip(event, 'fs87', 197)" onmouseover="showTip(event, 'fs87', 197)" class="fn">sampleEnd</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs91', 198)" onmouseover="showTip(event, 'fs91', 198)" class="fn">lastMonth</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs78', 199)" onmouseover="showTip(event, 'fs78', 199)" class="id">PlusMonths</span><span class="pn">(</span><span class="n">1</span><span class="pn">)</span><span class="uc">::</span><span onmouseout="hideTip(event, 'fs90', 200)" onmouseover="showTip(event, 'fs90', 200)" class="fn">window</span><span class="pn">)</span>
+            <span class="k">else</span> <span onmouseout="hideTip(event, 'fs90', 201)" onmouseover="showTip(event, 'fs90', 201)" class="fn">window</span>
+    <span onmouseout="hideTip(event, 'fs89', 202)" onmouseover="showTip(event, 'fs89', 202)" class="fn">loop</span> <span onmouseout="hideTip(event, 'fs87', 203)" onmouseover="showTip(event, 'fs87', 203)" class="fn">sampleEnd</span> <span class="pn">[</span><span onmouseout="hideTip(event, 'fs86', 204)" onmouseover="showTip(event, 'fs86', 204)" class="fn">sampleStart</span><span class="pn">]</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs38', 205)" onmouseover="showTip(event, 'fs38', 205)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs93', 206)" onmouseover="showTip(event, 'fs93', 206)" class="id">rev</span>
+</code></pre>
+
+            <div class="fsdocs-tip" id="fs1">module Portfolio</div>
+<div class="fsdocs-tip" id="fs2">namespace System</div>
+<div class="fsdocs-tip" id="fs3">namespace NodaTime</div>
+<div class="fsdocs-tip" id="fs4">Multiple items<br />[&lt;Struct&gt;]
+type YearMonth =
+  new : year: int * month: int -&gt; unit + 3 overloads
+  member CompareTo : other: YearMonth -&gt; int
+  member Equals : obj: obj -&gt; bool + 1 overload
+  member GetHashCode : unit -&gt; int
+  member OnDayOfMonth : day: int -&gt; LocalDate
+  member System.IComparable.CompareTo : obj: obj -&gt; int
+  member System.Xml.Serialization.IXmlSerializable.GetSchema : unit -&gt; XmlSchema
+  member System.Xml.Serialization.IXmlSerializable.ReadXml : reader: XmlReader -&gt; unit
+  member System.Xml.Serialization.IXmlSerializable.WriteXml : writer: XmlWriter -&gt; unit
+  member ToDateInterval : unit -&gt; DateInterval
+  ...<br /><em>&lt;summary&gt;
+            A year and month in a particular calendar. This is effectively
+            &lt;see cref=&quot;T:NodaTime.LocalDate&quot; /&gt; without the day-of-month component.
+            &lt;/summary&gt;<br />&lt;remarks&gt;&lt;para&gt;
+            Values can freely be compared for equality: a value in a different calendar system is not equal to
+            a value in a different calendar system. However, ordering comparisons
+            fail with &lt;see cref=&quot;T:System.ArgumentException&quot; /&gt;; attempting to compare values in different calendars
+            almost always indicates a bug in the calling code.
+            &lt;/para&gt;&lt;/remarks&gt;<br />&lt;threadsafety&gt;This type is an immutable value type. See the thread safety section of the user guide for more information.&lt;/threadsafety&gt;</em><br /><br />--------------------<br />YearMonth ()<br />YearMonth(year: int, month: int) : YearMonth<br />YearMonth(year: int, month: int, calendar: CalendarSystem) : YearMonth<br />YearMonth(era: Calendars.Era, yearOfEra: int, month: int) : YearMonth<br />YearMonth(era: Calendars.Era, yearOfEra: int, month: int, calendar: CalendarSystem) : YearMonth</div>
+<div class="fsdocs-tip" id="fs5">val this : YearMonth</div>
+<div class="fsdocs-tip" id="fs6">val months : int</div>
+<div class="fsdocs-tip" id="fs7">Multiple items<br />val int : value:&#39;T -&gt; int (requires member op_Explicit)<br /><em>&lt;summary&gt;Converts the argument to signed 32-bit integer. This is a direct conversion for all 
+ primitive numeric types. For strings, the input is converted using &lt;c&gt;Int32.Parse()&lt;/c&gt;  
+ with InvariantCulture settings. Otherwise the operation requires an appropriate
+ static conversion method on the input type.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted int&lt;/returns&gt;</em><br /><br />--------------------<br />[&lt;Struct&gt;]
+type int = int32<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Int32&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />type int&lt;&#39;Measure&gt; =
+  int<br /><em>&lt;summary&gt;The type of 32-bit signed integer numbers, annotated with a unit of measure. The unit
+ of measure is erased in compiled code and when values of this type
+ are analyzed using reflection. The type is representationally equivalent to 
+ &lt;see cref=&quot;T:System.Int32&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types with Units of Measure&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs8">YearMonth.OnDayOfMonth(day: int) : LocalDate</div>
+<div class="fsdocs-tip" id="fs9">type SecurityId =
+  | Ticker of string
+  | Cusip of string
+  | Bloomberg of string
+  | Permno of int
+  | Other of string</div>
+<div class="fsdocs-tip" id="fs10">union case SecurityId.Ticker: string -&gt; SecurityId</div>
+<div class="fsdocs-tip" id="fs11">Multiple items<br />val string : value:&#39;T -&gt; string<br /><em>&lt;summary&gt;Converts the argument to a string using &lt;c&gt;ToString&lt;/c&gt;.&lt;/summary&gt;<br />&lt;remarks&gt;For standard integer and floating point values the and any type that implements &lt;c&gt;IFormattable&lt;/c&gt;&lt;c&gt;ToString&lt;/c&gt; conversion uses &lt;c&gt;CultureInfo.InvariantCulture&lt;/c&gt;. &lt;/remarks&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted string.&lt;/returns&gt;</em><br /><br />--------------------<br />type string = String<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.String&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs12">union case SecurityId.Cusip: string -&gt; SecurityId</div>
+<div class="fsdocs-tip" id="fs13">union case SecurityId.Bloomberg: string -&gt; SecurityId</div>
+<div class="fsdocs-tip" id="fs14">union case SecurityId.Permno: int -&gt; SecurityId</div>
+<div class="fsdocs-tip" id="fs15">union case SecurityId.Other: string -&gt; SecurityId</div>
+<div class="fsdocs-tip" id="fs16">type InvestmentUniverse =
+  { FormationMonth: YearMonth
+    Securities: SecurityId list }</div>
+<div class="fsdocs-tip" id="fs17">InvestmentUniverse.FormationMonth: YearMonth</div>
+<div class="fsdocs-tip" id="fs18">InvestmentUniverse.Securities: SecurityId list</div>
+<div class="fsdocs-tip" id="fs19">type &#39;T list = List&lt;&#39;T&gt;<br /><em>&lt;summary&gt;The type of immutable singly-linked lists. &lt;/summary&gt;<br />&lt;remarks&gt;See the &lt;see cref=&quot;T:Microsoft.FSharp.Collections.ListModule&quot; /&gt; module for further operations related to lists.
+
+ Use the constructors &lt;c&gt;[]&lt;/c&gt; and &lt;c&gt;::&lt;/c&gt; (infix) to create values of this type, or
+ the notation &lt;c&gt;[1; 2; 3]&lt;/c&gt;. Use the values in the &lt;c&gt;List&lt;/c&gt; module to manipulate 
+ values of this type, or pattern match against the values directly.
+
+  See also &lt;a href=&quot;https://docs.microsoft.com/dotnet/fsharp/language-reference/lists&quot;&gt;F# Language Guide - Lists&lt;/a&gt;.
+ &lt;/remarks&gt;</em></div>
+<div class="fsdocs-tip" id="fs20">type SecuritySignal =
+  { SecurityId: SecurityId
+    Signal: float }</div>
+<div class="fsdocs-tip" id="fs21">Multiple items<br />SecuritySignal.SecurityId: SecurityId<br /><br />--------------------<br />type SecurityId =
+  | Ticker of string
+  | Cusip of string
+  | Bloomberg of string
+  | Permno of int
+  | Other of string</div>
+<div class="fsdocs-tip" id="fs22">SecuritySignal.Signal: float</div>
+<div class="fsdocs-tip" id="fs23">Multiple items<br />val float : value:&#39;T -&gt; float (requires member op_Explicit)<br /><em>&lt;summary&gt;Converts the argument to 64-bit float. This is a direct conversion for all 
+ primitive numeric types. For strings, the input is converted using &lt;c&gt;Double.Parse()&lt;/c&gt;  
+ with InvariantCulture settings. Otherwise the operation requires an appropriate
+ static conversion method on the input type.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted float&lt;/returns&gt;</em><br /><br />--------------------<br />[&lt;Struct&gt;]
+type float = Double<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />type float&lt;&#39;Measure&gt; =
+  float<br /><em>&lt;summary&gt;The type of double-precision floating point numbers, annotated with a unit of measure. 
+ The unit of measure is erased in compiled code and when values of this type
+ are analyzed using reflection. The type is representationally equivalent to 
+ &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category index=&quot;6&quot;&gt;Basic Types with Units of Measure&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs24">type SecuritiesWithSignals =
+  { FormationMonth: YearMonth
+    Signals: SecuritySignal list }</div>
+<div class="fsdocs-tip" id="fs25">SecuritiesWithSignals.FormationMonth: YearMonth</div>
+<div class="fsdocs-tip" id="fs26">SecuritiesWithSignals.Signals: SecuritySignal list</div>
+<div class="fsdocs-tip" id="fs27">type PortfolioId =
+  | Named of string
+  | Indexed of name: string * index: int</div>
+<div class="fsdocs-tip" id="fs28">union case PortfolioId.Named: string -&gt; PortfolioId</div>
+<div class="fsdocs-tip" id="fs29">union case PortfolioId.Indexed: name: string * index: int -&gt; PortfolioId</div>
+<div class="fsdocs-tip" id="fs30">type AssignedPortfolio =
+  { PortfolioId: PortfolioId
+    FormationMonth: YearMonth
+    Signals: SecuritySignal list }</div>
+<div class="fsdocs-tip" id="fs31">Multiple items<br />AssignedPortfolio.PortfolioId: PortfolioId<br /><br />--------------------<br />type PortfolioId =
+  | Named of string
+  | Indexed of name: string * index: int</div>
+<div class="fsdocs-tip" id="fs32">AssignedPortfolio.FormationMonth: YearMonth</div>
+<div class="fsdocs-tip" id="fs33">AssignedPortfolio.Signals: SecuritySignal list</div>
+<div class="fsdocs-tip" id="fs34">val assignSignalSort : name:string -&gt; n:int -&gt; xs:SecuritiesWithSignals -&gt; AssignedPortfolio list</div>
+<div class="fsdocs-tip" id="fs35">val name : string</div>
+<div class="fsdocs-tip" id="fs36">val n : int</div>
+<div class="fsdocs-tip" id="fs37">val xs : SecuritiesWithSignals</div>
+<div class="fsdocs-tip" id="fs38">Multiple items<br />module List
+
+from Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with values of type &lt;see cref=&quot;T:Microsoft.FSharp.Collections.list`1&quot; /&gt;.&lt;/summary&gt;<br />&lt;namespacedoc&gt;&lt;summary&gt;Operations for collections such as lists, arrays, sets, maps and sequences. See also 
+    &lt;a href=&quot;https://docs.microsoft.com/dotnet/fsharp/language-reference/fsharp-collection-types&quot;&gt;F# Collection Types&lt;/a&gt; in the F# Language Guide.
+ &lt;/summary&gt;&lt;/namespacedoc&gt;</em><br /><br />--------------------<br />type List&lt;&#39;T&gt; =
+  | ( [] )
+  | ( :: ) of Head: &#39;T * Tail: &#39;T list
+    interface IReadOnlyList&lt;&#39;T&gt;
+    interface IReadOnlyCollection&lt;&#39;T&gt;
+    interface IEnumerable
+    interface IEnumerable&lt;&#39;T&gt;
+    member GetReverseIndex : rank:int * offset:int -&gt; int
+    member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list
+    static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list
+    member Head : &#39;T
+    member IsEmpty : bool
+    member Item : index:int -&gt; &#39;T with get
+    ...<br /><em>&lt;summary&gt;The type of immutable singly-linked lists.&lt;/summary&gt;<br />&lt;remarks&gt;Use the constructors &lt;c&gt;[]&lt;/c&gt; and &lt;c&gt;::&lt;/c&gt; (infix) to create values of this type, or
+ the notation &lt;c&gt;[1;2;3]&lt;/c&gt;. Use the values in the &lt;c&gt;List&lt;/c&gt; module to manipulate 
+ values of this type, or pattern match against the values directly.
+ &lt;/remarks&gt;<br />&lt;exclude /&gt;</em></div>
+<div class="fsdocs-tip" id="fs39">val sortBy : projection:(&#39;T -&gt; &#39;Key) -&gt; list:&#39;T list -&gt; &#39;T list (requires comparison)<br /><em>&lt;summary&gt;Sorts the given list using keys given by the given projection. Keys are compared using &lt;see cref=&quot;M:Microsoft.FSharp.Core.Operators.compare&quot; /&gt;.&lt;/summary&gt;<br />&lt;remarks&gt;This is a stable sort, i.e. the original order of equal elements is preserved.&lt;/remarks&gt;<br />&lt;param name=&quot;projection&quot;&gt;The function to transform the list elements into the type to be compared.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The sorted list.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs40">val x : SecuritySignal</div>
+<div class="fsdocs-tip" id="fs41">val splitInto : count:int -&gt; list:&#39;T list -&gt; &#39;T list list<br /><em>&lt;summary&gt;Splits the input list into at most &lt;c&gt;count&lt;/c&gt; chunks.&lt;/summary&gt;<br />&lt;param name=&quot;count&quot;&gt;The maximum number of chunks.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The list split into chunks.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentException&quot;&gt;Thrown when &lt;c&gt;count&lt;/c&gt; is not positive.&lt;/exception&gt;</em></div>
+<div class="fsdocs-tip" id="fs42">val mapi : mapping:(int -&gt; &#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><em>&lt;summary&gt;Builds a new collection whose elements are the results of applying the given function
+ to each of the elements of the collection. The integer index passed to the
+ function indicates the index (from 0) of element being transformed.&lt;/summary&gt;<br />&lt;param name=&quot;mapping&quot;&gt;The function to transform elements and their indices.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The list of transformed elements.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs43">val i : int</div>
+<div class="fsdocs-tip" id="fs44">val ys : SecuritySignal list</div>
+<div class="fsdocs-tip" id="fs45">type Position =
+  { SecurityId: SecurityId
+    Weight: float }</div>
+<div class="fsdocs-tip" id="fs46">Multiple items<br />Position.SecurityId: SecurityId<br /><br />--------------------<br />type SecurityId =
+  | Ticker of string
+  | Cusip of string
+  | Bloomberg of string
+  | Permno of int
+  | Other of string</div>
+<div class="fsdocs-tip" id="fs47">Position.Weight: float</div>
+<div class="fsdocs-tip" id="fs48">type Portfolio =
+  { PortfolioId: PortfolioId
+    FormationMonth: YearMonth
+    Positions: Position list }</div>
+<div class="fsdocs-tip" id="fs49">Multiple items<br />Portfolio.PortfolioId: PortfolioId<br /><br />--------------------<br />type PortfolioId =
+  | Named of string
+  | Indexed of name: string * index: int</div>
+<div class="fsdocs-tip" id="fs50">Portfolio.FormationMonth: YearMonth</div>
+<div class="fsdocs-tip" id="fs51">Portfolio.Positions: Position list</div>
+<div class="fsdocs-tip" id="fs52">type PortfolioReturn =
+  { PortfolioId: PortfolioId
+    YearMonth: YearMonth
+    Return: float }</div>
+<div class="fsdocs-tip" id="fs53">Multiple items<br />PortfolioReturn.PortfolioId: PortfolioId<br /><br />--------------------<br />type PortfolioId =
+  | Named of string
+  | Indexed of name: string * index: int</div>
+<div class="fsdocs-tip" id="fs54">Multiple items<br />PortfolioReturn.YearMonth: YearMonth<br /><br />--------------------<br />[&lt;Struct&gt;]
+type YearMonth =
+  new : year: int * month: int -&gt; unit + 3 overloads
+  member CompareTo : other: YearMonth -&gt; int
+  member Equals : obj: obj -&gt; bool + 1 overload
+  member GetHashCode : unit -&gt; int
+  member OnDayOfMonth : day: int -&gt; LocalDate
+  member System.IComparable.CompareTo : obj: obj -&gt; int
+  member System.Xml.Serialization.IXmlSerializable.GetSchema : unit -&gt; XmlSchema
+  member System.Xml.Serialization.IXmlSerializable.ReadXml : reader: XmlReader -&gt; unit
+  member System.Xml.Serialization.IXmlSerializable.WriteXml : writer: XmlWriter -&gt; unit
+  member ToDateInterval : unit -&gt; DateInterval
+  ...<br /><em>&lt;summary&gt;
+            A year and month in a particular calendar. This is effectively
+            &lt;see cref=&quot;T:NodaTime.LocalDate&quot; /&gt; without the day-of-month component.
+            &lt;/summary&gt;<br />&lt;remarks&gt;&lt;para&gt;
+            Values can freely be compared for equality: a value in a different calendar system is not equal to
+            a value in a different calendar system. However, ordering comparisons
+            fail with &lt;see cref=&quot;T:System.ArgumentException&quot; /&gt;; attempting to compare values in different calendars
+            almost always indicates a bug in the calling code.
+            &lt;/para&gt;&lt;/remarks&gt;<br />&lt;threadsafety&gt;This type is an immutable value type. See the thread safety section of the user guide for more information.&lt;/threadsafety&gt;</em><br /><br />--------------------<br />YearMonth ()<br />YearMonth(year: int, month: int) : YearMonth<br />YearMonth(year: int, month: int, calendar: CalendarSystem) : YearMonth<br />YearMonth(era: Calendars.Era, yearOfEra: int, month: int) : YearMonth<br />YearMonth(era: Calendars.Era, yearOfEra: int, month: int, calendar: CalendarSystem) : YearMonth</div>
+<div class="fsdocs-tip" id="fs55">PortfolioReturn.Return: float</div>
+<div class="fsdocs-tip" id="fs56">type GetsMarketCaps = SecurityId * YearMonth -&gt; Option&lt;SecurityId * float&gt;</div>
+<div class="fsdocs-tip" id="fs57">module Option
+
+from Microsoft.FSharp.Core<br /><em>&lt;summary&gt;Contains operations for working with options.&lt;/summary&gt;<br />&lt;category&gt;Options&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs58">val giveValueWeights : marketCapGetter:GetsMarketCaps -&gt; x:AssignedPortfolio -&gt; Portfolio</div>
+<div class="fsdocs-tip" id="fs59">val marketCapGetter : GetsMarketCaps</div>
+<div class="fsdocs-tip" id="fs60">val x : AssignedPortfolio</div>
+<div class="fsdocs-tip" id="fs61">val mktCaps : (SecurityId * float) list</div>
+<div class="fsdocs-tip" id="fs62">val choose : chooser:(&#39;T -&gt; &#39;U option) -&gt; list:&#39;T list -&gt; &#39;U list<br /><em>&lt;summary&gt;Applies the given function to each element of the list. Returns
+ the list comprised of the results &lt;c&gt;x&lt;/c&gt; for each element where
+ the function returns Some(x)&lt;/summary&gt;<br />&lt;param name=&quot;chooser&quot;&gt;The function to generate options from the elements.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The list comprising the values selected from the chooser function.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs63">val signal : SecuritySignal</div>
+<div class="fsdocs-tip" id="fs64">SecuritySignal.SecurityId: SecurityId</div>
+<div class="fsdocs-tip" id="fs65">val totMktCap : float</div>
+<div class="fsdocs-tip" id="fs66">val sumBy : projection:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U (requires member ( + ) and member get_Zero)<br /><em>&lt;summary&gt;Returns the sum of the results generated by applying the function to each element of the list.&lt;/summary&gt;<br />&lt;param name=&quot;projection&quot;&gt;The function to transform the list elements into the type to be summed.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The resulting sum.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs67">val snd : tuple:(&#39;T1 * &#39;T2) -&gt; &#39;T2<br /><em>&lt;summary&gt;Return the second element of a tuple, &lt;c&gt;snd (a,b) = b&lt;/c&gt;.&lt;/summary&gt;<br />&lt;param name=&quot;tuple&quot;&gt;The input tuple.&lt;/param&gt;<br />&lt;returns&gt;The second value.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs68">val pos : Position list</div>
+<div class="fsdocs-tip" id="fs69">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><em>&lt;summary&gt;Builds a new collection whose elements are the results of applying the given function
+ to each of the elements of the collection.&lt;/summary&gt;<br />&lt;param name=&quot;mapping&quot;&gt;The function to transform elements from the input list.&lt;/param&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The list of transformed elements.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs70">val id : SecurityId</div>
+<div class="fsdocs-tip" id="fs71">val mktCap : float</div>
+<div class="fsdocs-tip" id="fs72">AssignedPortfolio.PortfolioId: PortfolioId</div>
+<div class="fsdocs-tip" id="fs73">type GetsReturn = SecurityId * YearMonth -&gt; SecurityId * float</div>
+<div class="fsdocs-tip" id="fs74">val getPortfolioReturn : returnGetter:GetsReturn -&gt; x:Portfolio -&gt; PortfolioReturn</div>
+<div class="fsdocs-tip" id="fs75">val returnGetter : GetsReturn</div>
+<div class="fsdocs-tip" id="fs76">val x : Portfolio</div>
+<div class="fsdocs-tip" id="fs77">val returnMonth : YearMonth</div>
+<div class="fsdocs-tip" id="fs78">member YearMonth.PlusMonths : months:int -&gt; YearMonth</div>
+<div class="fsdocs-tip" id="fs79">val portRet : float</div>
+<div class="fsdocs-tip" id="fs80">val pos : Position</div>
+<div class="fsdocs-tip" id="fs81">val _id : SecurityId</div>
+<div class="fsdocs-tip" id="fs82">val ret : float</div>
+<div class="fsdocs-tip" id="fs83">Position.SecurityId: SecurityId</div>
+<div class="fsdocs-tip" id="fs84">Portfolio.PortfolioId: PortfolioId</div>
+<div class="fsdocs-tip" id="fs85">val getSampleMonths : sampleStart:YearMonth * sampleEnd:YearMonth -&gt; YearMonth list<br /><em>&#160;This function takes a sample start and sample end<br />&#160;and returns a list with all months from start to end.<br />&#160;Don&#39;t worry about understanding what this function does.<br />&#160;The details are beyond the scope of the class, but if you&#39;re<br />&#160;curious it&#39;s a recursive function:<br />&#160;https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/functions/recursive-functions-the-rec-keyword</em></div>
+<div class="fsdocs-tip" id="fs86">val sampleStart : YearMonth</div>
+<div class="fsdocs-tip" id="fs87">val sampleEnd : YearMonth</div>
+<div class="fsdocs-tip" id="fs88">val failwith : message:string -&gt; &#39;T<br /><em>&lt;summary&gt;Throw a &lt;see cref=&quot;T:System.Exception&quot; /&gt; exception.&lt;/summary&gt;<br />&lt;param name=&quot;message&quot;&gt;The exception message.&lt;/param&gt;<br />&lt;returns&gt;The result value.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs89">val loop : (YearMonth -&gt; YearMonth list -&gt; YearMonth list)</div>
+<div class="fsdocs-tip" id="fs90">val window : YearMonth list</div>
+<div class="fsdocs-tip" id="fs91">val lastMonth : YearMonth</div>
+<div class="fsdocs-tip" id="fs92">val _monthsBeforeThat : YearMonth list</div>
+<div class="fsdocs-tip" id="fs93">val rev : list:&#39;T list -&gt; &#39;T list<br /><em>&lt;summary&gt;Returns a new list with the elements in reverse order.&lt;/summary&gt;<br />&lt;param name=&quot;list&quot;&gt;The input list.&lt;/param&gt;<br />&lt;returns&gt;The reversed list.&lt;/returns&gt;</em></div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/Teaching/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/Teaching/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    </div>
+</body>
+
+</html>

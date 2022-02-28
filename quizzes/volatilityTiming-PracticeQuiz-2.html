@@ -1,0 +1,2223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Volatility Timing Part 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/Teaching/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/Teaching/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/Teaching/"><img id="fsdocs-logo" src="/Teaching/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/nhirschey/Teaching/blob/main/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/nhirschey/Teaching">Source Repository</a></li>
+                <li class="nav-header">
+  Getting Started
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/install.html">
+    Install Software
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/learn-fsharp.html">
+    Learn F#
+  </a>
+</li>             
+<li class="nav-header">
+  Lectures
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/fundamentals.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/portfolio-statistics.html">
+    Basic Portfolio Statistics
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/VolatilityTiming.html">
+    Volatility Timing
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/portfolio-returns.html">
+    Portfolio Returns
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/PortfolioFormation-SimpleExample.html">
+    Building a strategy
+  </a>
+</li>             
+<li class="nav-header">
+  Assignments
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-1-download-data.html">
+    Webscraping HTML to CSV
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-tuples-and-records.html">
+    Tuples and Records (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-collection-functions.html">
+    Collection functions (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/football-plotting.html">
+    Plotting (with solutions)
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/select-project-signal.html">
+    Select Project Signals
+  </a>
+</li>             
+<li class="nav-header">
+  Practice Quizzes
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/fundamentals-PracticeQuiz.html">
+    Fundamentals
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/volatilityTiming-PracticeQuiz.html">
+    Volatility Timing Part 1
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/volatilityTiming-PracticeQuiz-2.html">
+    Volatility Timing Part 2
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/Option-Match-Map-practiceQuiz.html">
+    Option Match Map
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/discriminatedUnion-practiceQuiz.html">
+    Dicriminated Union
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/portfolios-PracticeQuiz.html">
+    Portfolios
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/quizzes/factors-practiceQuiz.html">
+    Factors
+  </a>
+</li>             
+<li class="nav-header">
+  Other
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Common.html">
+    Common
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Momentum-Class.html">
+    Price momentum
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/Portfolio.html">
+    Portfolio
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Teaching/YahooFinance.html">
+    YahooFinance
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/Teaching/">Teaching</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            
+<p><a href="https://mybinder.org/v2/gh/nhirschey/teaching/gh-pages?filepath=quizzes/volatilityTiming-PracticeQuiz-2.ipynb"><img src="../img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="/Teaching//quizzes/volatilityTiming-PracticeQuiz-2.fsx"><img src="../img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="/Teaching//quizzes/volatilityTiming-PracticeQuiz-2.ipynb"><img src="../img/badge-notebook.svg" alt="Notebook" /></a></p>
+<p>We're going to use the following in the questions</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget: FSharp.Stats&quot;</span>
+
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">System</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">Stats</span>
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="rt">ReturnOb</span> <span class="o">=</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="prop">Symbol</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="rt">string</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="prop">Date</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs8', 8)" onmouseover="showTip(event, 'fs8', 8)" class="vt">DateTime</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs9', 9)" onmouseover="showTip(event, 'fs9', 9)" class="prop">Return</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs10', 10)" onmouseover="showTip(event, 'fs10', 10)" class="vt">float</span> <span class="pn">}</span>
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs11', 11)" onmouseover="showTip(event, 'fs11', 11)" class="rt">ValueOb</span> <span class="o">=</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs12', 12)" onmouseover="showTip(event, 'fs12', 12)" class="prop">Symbol</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs6', 13)" onmouseover="showTip(event, 'fs6', 13)" class="rt">string</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs13', 14)" onmouseover="showTip(event, 'fs13', 14)" class="prop">Date</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs8', 15)" onmouseover="showTip(event, 'fs8', 15)" class="vt">DateTime</span><span class="pn">;</span> <span onmouseout="hideTip(event, 'fs14', 16)" onmouseover="showTip(event, 'fs14', 16)" class="prop">Value</span> <span class="pn">:</span> <span onmouseout="hideTip(event, 'fs10', 17)" onmouseover="showTip(event, 'fs10', 17)" class="vt">float</span> <span class="pn">}</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="id">seed</span> <span class="o">=</span> <span class="n">1</span>
+<span onmouseout="hideTip(event, 'fs16', 19)" onmouseover="showTip(event, 'fs16', 19)" class="m">Random</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 20)" onmouseover="showTip(event, 'fs17', 20)" class="id">SetSampleGenerator</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="m">Random</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs18', 22)" onmouseover="showTip(event, 'fs18', 22)" class="id">RandBasic</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs15', 23)" onmouseover="showTip(event, 'fs15', 23)" class="id">seed</span><span class="pn">)</span><span class="pn">)</span>   
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 24)" onmouseover="showTip(event, 'fs19', 24)" class="id">normal</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 25)" onmouseover="showTip(event, 'fs20', 25)" class="id">Distributions</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs21', 26)" onmouseover="showTip(event, 'fs21', 26)" class="m">Continuous</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs22', 27)" onmouseover="showTip(event, 'fs22', 27)" class="id">normal</span> <span class="n">0.0</span> <span class="n">0.1</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 28)" onmouseover="showTip(event, 'fs23', 28)" class="id">returns</span> <span class="o">=</span>
+    <span class="pn">[|</span> 
+        <span class="k">for</span> <span onmouseout="hideTip(event, 'fs24', 29)" onmouseover="showTip(event, 'fs24', 29)" class="fn">symbol</span> <span class="k">in</span> <span class="pn">[</span><span class="s">&quot;AAPL&quot;</span><span class="pn">;</span> <span class="s">&quot;TSLA&quot;</span><span class="pn">]</span> <span class="k">do</span>
+        <span class="k">for</span> <span onmouseout="hideTip(event, 'fs25', 30)" onmouseover="showTip(event, 'fs25', 30)" class="fn">month</span> <span class="k">in</span> <span class="pn">[</span><span class="n">1..</span><span class="n">2</span><span class="pn">]</span> <span class="k">do</span>
+        <span class="k">for</span> <span onmouseout="hideTip(event, 'fs26', 31)" onmouseover="showTip(event, 'fs26', 31)" class="fn">day</span> <span class="k">in</span> <span class="pn">[</span><span class="n">1..</span><span class="n">3</span><span class="pn">]</span> <span class="k">do</span>
+            <span class="pn">{</span> <span class="prop">Symbol</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 32)" onmouseover="showTip(event, 'fs24', 32)" class="fn">symbol</span> 
+              <span class="prop">Date</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 33)" onmouseover="showTip(event, 'fs8', 33)" class="fn">DateTime</span><span class="pn">(</span><span class="n">2021</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs25', 34)" onmouseover="showTip(event, 'fs25', 34)" class="fn">month</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs26', 35)" onmouseover="showTip(event, 'fs26', 35)" class="fn">day</span><span class="pn">)</span>
+              <span class="prop">Return</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs19', 36)" onmouseover="showTip(event, 'fs19', 36)" class="id">normal</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs27', 37)" onmouseover="showTip(event, 'fs27', 37)" class="id">Sample</span><span class="pn">(</span><span class="pn">)</span><span class="pn">}</span>
+    <span class="pn">|]</span>
+</code></pre>
+<h2><a name="Question-1" class="anchor" href="#Question-1">Question 1</a></h2>
+<p>Take this array of arrays, add <code>1.0</code> to each element of the "inner" arrays,
+and then concatenate all the inner arrays together.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">[|</span> <span class="pn">[|</span> <span class="n">1.0</span><span class="pn">;</span> <span class="n">2.0</span><span class="pn">|]</span>
+   <span class="pn">[|</span> <span class="n">3.0</span><span class="pn">;</span> <span class="n">4.0</span><span class="pn">|]</span> <span class="pn">|]</span>
+</code></pre>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">[|</span> <span class="pn">[|</span> <span class="n">1.0</span><span class="pn">;</span> <span class="n">2.0</span><span class="pn">|]</span>
+   <span class="pn">[|</span> <span class="n">3.0</span><span class="pn">;</span> <span class="n">4.0</span><span class="pn">|]</span> <span class="pn">|]</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 38)" onmouseover="showTip(event, 'fs28', 38)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 39)" onmouseover="showTip(event, 'fs29', 39)" class="id">collect</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs30', 40)" onmouseover="showTip(event, 'fs30', 40)" class="fn">xs</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs30', 41)" onmouseover="showTip(event, 'fs30', 41)" class="fn">xs</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 42)" onmouseover="showTip(event, 'fs28', 42)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 43)" onmouseover="showTip(event, 'fs31', 43)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs32', 44)" onmouseover="showTip(event, 'fs32', 44)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs32', 45)" onmouseover="showTip(event, 'fs32', 45)" class="fn">x</span> <span class="o">+</span> <span class="n">1.0</span><span class="pn">)</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.001, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val it : float [] = [|2.0; 3.0; 4.0; 5.0|]</code></pre></td></tr></table>
+<p>or</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">[|</span> <span class="pn">[|</span> <span class="n">1.0</span><span class="pn">;</span> <span class="n">2.0</span><span class="pn">|]</span>
+   <span class="pn">[|</span> <span class="n">3.0</span><span class="pn">;</span> <span class="n">4.0</span><span class="pn">|]</span> <span class="pn">|]</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 46)" onmouseover="showTip(event, 'fs28', 46)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 47)" onmouseover="showTip(event, 'fs31', 47)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs30', 48)" onmouseover="showTip(event, 'fs30', 48)" class="fn">xs</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs30', 49)" onmouseover="showTip(event, 'fs30', 49)" class="fn">xs</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 50)" onmouseover="showTip(event, 'fs28', 50)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 51)" onmouseover="showTip(event, 'fs31', 51)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs32', 52)" onmouseover="showTip(event, 'fs32', 52)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs32', 53)" onmouseover="showTip(event, 'fs32', 53)" class="fn">x</span> <span class="o">+</span> <span class="n">1.0</span><span class="pn">)</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 54)" onmouseover="showTip(event, 'fs28', 54)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 55)" onmouseover="showTip(event, 'fs33', 55)" class="id">concat</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.001, CPU: 00:00:00.015, GC gen0: 0, gen1: 0, gen2: 0
+val it : float [] = [|2.0; 3.0; 4.0; 5.0|]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-2" class="anchor" href="#Question-2">Question 2</a></h2>
+<p>Take the following two-parameter function:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs34', 56)" onmouseover="showTip(event, 'fs34', 56)" class="fn">add</span> <span onmouseout="hideTip(event, 'fs35', 57)" onmouseover="showTip(event, 'fs35', 57)" class="fn">x</span> <span onmouseout="hideTip(event, 'fs36', 58)" onmouseover="showTip(event, 'fs36', 58)" class="fn">y</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs35', 59)" onmouseover="showTip(event, 'fs35', 59)" class="fn">x</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs36', 60)" onmouseover="showTip(event, 'fs36', 60)" class="fn">y</span>
+</code></pre>
+<p>Use the above function and <a href="https://fsharpforfunandprofit.com/posts/partial-application/">partial application</a>
+to define a new function called
+<code>add2</code> that adds 2
+to it's input.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs37', 61)" onmouseover="showTip(event, 'fs37', 61)" class="fn">add2</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs34', 62)" onmouseover="showTip(event, 'fs34', 62)" class="fn">add</span> <span class="n">2</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val add2 : (int -&gt; int)</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-3" class="anchor" href="#Question-3">Question 3</a></h2>
+<p>Given <code>returns : ReturnOb []</code>, use <code>printfn</code> to print the whole
+array to standard output using the <a href="https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/plaintext-formatting">structured plaintext formatter</a>.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs23', 63)" onmouseover="showTip(event, 'fs23', 63)" class="id">returns</span> <span class="o">|&gt;</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs38', 64)" onmouseover="showTip(event, 'fs38', 64)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%A</span><span class="s">&quot;</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>[|{ Symbol = "AAPL"
+    Date = 1/1/2021 12:00:00 AM
+    Return = -0.02993466474 }; { Symbol = "AAPL"
+                                 Date = 1/2/2021 12:00:00 AM
+                                 Return = -0.01872509079 };
+  { Symbol = "AAPL"
+    Date = 1/3/2021 12:00:00 AM
+    Return = 0.1904072042 }; { Symbol = "AAPL"
+                               Date = 2/1/2021 12:00:00 AM
+                               Return = -0.01626157984 };
+  { Symbol = "AAPL"
+    Date = 2/2/2021 12:00:00 AM
+    Return = -0.0767937252 }; { Symbol = "AAPL"
+                                Date = 2/3/2021 12:00:00 AM
+                                Return = 0.1308654699 };
+  { Symbol = "TSLA"
+    Date = 1/1/2021 12:00:00 AM
+    Return = -0.1487757845 }; { Symbol = "TSLA"
+                                Date = 1/2/2021 12:00:00 AM
+                                Return = 0.1059620976 };
+  { Symbol = "TSLA"
+    Date = 1/3/2021 12:00:00 AM
+    Return = -0.108695795 }; { Symbol = "TSLA"
+                               Date = 2/1/2021 12:00:00 AM
+                               Return = 0.04571273462 };
+  { Symbol = "TSLA"
+    Date = 2/2/2021 12:00:00 AM
+    Return = 0.099311576 }; { Symbol = "TSLA"
+                              Date = 2/3/2021 12:00:00 AM
+                              Return = 0.04506957545 }|]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-4" class="anchor" href="#Question-4">Question 4</a></h2>
+<p>Given the tuple <code>("hi", false, 20.321, 4)</code>,
+use <code>printfn</code> and the tuple to print the following string
+to standard output:
+<code>"hi teacher, my False knowledge implies that 4%=0020.1"</code></p>
+<p><a href="https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/plaintext-formatting#format-specifiers-for-printf">String formatting</a> documentation will be useful.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs39', 65)" onmouseover="showTip(event, 'fs39', 65)" class="id">xString</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs40', 66)" onmouseover="showTip(event, 'fs40', 66)" class="id">xBool</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs41', 67)" onmouseover="showTip(event, 'fs41', 67)" class="id">xFloat</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs42', 68)" onmouseover="showTip(event, 'fs42', 68)" class="id">xInt</span><span class="pn">)</span> <span class="o">=</span> <span class="pn">(</span><span class="s">&quot;hi&quot;</span><span class="pn">,</span> <span class="k">false</span><span class="pn">,</span> <span class="n">20.321</span><span class="pn">,</span> <span class="n">4</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val xString : string = "hi"
+val xInt : int = 4
+val xFloat : float = 20.321
+val xBool : bool = false</code></pre></td></tr></table>
+<p>Using string interpolation</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs38', 69)" onmouseover="showTip(event, 'fs38', 69)" class="fn">printfn</span> <span class="s">$&quot;{</span><span onmouseout="hideTip(event, 'fs39', 70)" onmouseover="showTip(event, 'fs39', 70)" class="id">xString</span><span class="s">} teacher, my {</span><span class="id">xBool</span><span class="s">} knowledge implies that {</span><span class="id">xInt</span><span class="s">}</span><span class="pf">%%</span><span class="s">=</span><span class="pf">%06.1f</span><span class="s">{</span><span class="id">xFloat</span><span class="s">}&quot;</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>hi teacher, my False knowledge implies that 4%=0020.3</code></pre></td></tr></table>
+<p>Using old-style printfn</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs38', 71)" onmouseover="showTip(event, 'fs38', 71)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s"> teacher, my </span><span class="pf">%b</span><span class="s"> knowledge implies that </span><span class="pf">%i</span><span class="s"></span><span class="pf">%%</span><span class="s">=</span><span class="pf">%06.1f</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs39', 72)" onmouseover="showTip(event, 'fs39', 72)" class="id">xString</span> <span onmouseout="hideTip(event, 'fs40', 73)" onmouseover="showTip(event, 'fs40', 73)" class="id">xBool</span> <span onmouseout="hideTip(event, 'fs42', 74)" onmouseover="showTip(event, 'fs42', 74)" class="id">xInt</span> <span onmouseout="hideTip(event, 'fs41', 75)" onmouseover="showTip(event, 'fs41', 75)" class="id">xFloat</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>hi teacher, my false knowledge implies that 4%=0020.3</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-5" class="anchor" href="#Question-5">Question 5</a></h2>
+<p>Given <code>returns : ReturnOb []</code>, calculate the arithmetic average return
+for every symbol each month.
+Give the result as a <code>ReturnOb []</code> where the date is the last date for the symbol
+each month.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs23', 76)" onmouseover="showTip(event, 'fs23', 76)" class="id">returns</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 77)" onmouseover="showTip(event, 'fs28', 77)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 78)" onmouseover="showTip(event, 'fs43', 78)" class="id">groupBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 79)" onmouseover="showTip(event, 'fs44', 79)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 80)" onmouseover="showTip(event, 'fs44', 80)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 81)" onmouseover="showTip(event, 'fs5', 81)" class="id">Symbol</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs44', 82)" onmouseover="showTip(event, 'fs44', 82)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 83)" onmouseover="showTip(event, 'fs7', 83)" class="prop">Date</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs45', 84)" onmouseover="showTip(event, 'fs45', 84)" class="id">Year</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs44', 85)" onmouseover="showTip(event, 'fs44', 85)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 86)" onmouseover="showTip(event, 'fs7', 86)" class="prop">Date</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs46', 87)" onmouseover="showTip(event, 'fs46', 87)" class="id">Month</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 88)" onmouseover="showTip(event, 'fs28', 88)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 89)" onmouseover="showTip(event, 'fs31', 89)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs24', 90)" onmouseover="showTip(event, 'fs24', 90)" class="id">symbol</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs47', 91)" onmouseover="showTip(event, 'fs47', 91)" class="id">_year</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs48', 92)" onmouseover="showTip(event, 'fs48', 92)" class="id">_month</span><span class="pn">)</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs49', 93)" onmouseover="showTip(event, 'fs49', 93)" class="fn">xs</span><span class="pn">)</span> <span class="k">-&gt;</span>
+    <span class="pn">{</span> <span class="prop">Symbol</span> <span class="o">=</span> <span class="fn">symbol</span> 
+      <span class="prop">Date</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 94)" onmouseover="showTip(event, 'fs49', 94)" class="fn">xs</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 95)" onmouseover="showTip(event, 'fs28', 95)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 96)" onmouseover="showTip(event, 'fs31', 96)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 97)" onmouseover="showTip(event, 'fs44', 97)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 98)" onmouseover="showTip(event, 'fs44', 98)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 99)" onmouseover="showTip(event, 'fs7', 99)" class="id">Date</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 100)" onmouseover="showTip(event, 'fs28', 100)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 101)" onmouseover="showTip(event, 'fs50', 101)" class="id">max</span> 
+      <span class="prop">Return</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 102)" onmouseover="showTip(event, 'fs49', 102)" class="fn">xs</span><span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 103)" onmouseover="showTip(event, 'fs28', 103)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs51', 104)" onmouseover="showTip(event, 'fs51', 104)" class="id">averageBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 105)" onmouseover="showTip(event, 'fs44', 105)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 106)" onmouseover="showTip(event, 'fs44', 106)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 107)" onmouseover="showTip(event, 'fs9', 107)" class="id">Return</span><span class="pn">)</span> <span class="pn">}</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.003, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val it : ReturnOb [] =
+  [|{ Symbol = "AAPL"
+      Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Sunday;
+                                   DayOfYear = 3;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 1;
+                                   Second = 0;
+                                   Ticks = 637452288000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Return = 0.04724914955 };
+    { Symbol = "AAPL"
+      Date = 2/3/2021 12:00:00 AM {Date = 2/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Wednesday;
+                                   DayOfYear = 34;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637479072000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Return = 0.01260338828 };
+    { Symbol = "TSLA"
+      Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Sunday;
+                                   DayOfYear = 3;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 1;
+                                   Second = 0;
+                                   Ticks = 637452288000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Return = -0.05050316065 };
+    { Symbol = "TSLA"
+      Date = 2/3/2021 12:00:00 AM {Date = 2/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Wednesday;
+                                   DayOfYear = 34;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637479072000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Return = 0.06336462869 }|]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-6" class="anchor" href="#Question-6">Question 6</a></h2>
+<p>Given <code>returns : ReturnOb []</code>, calculate the monthly return
+for every symbol each month.
+Give the result as a <code>ReturnOb []</code> where the date is the last date for the symbol
+each month.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs23', 108)" onmouseover="showTip(event, 'fs23', 108)" class="id">returns</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 109)" onmouseover="showTip(event, 'fs28', 109)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 110)" onmouseover="showTip(event, 'fs43', 110)" class="id">groupBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 111)" onmouseover="showTip(event, 'fs44', 111)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 112)" onmouseover="showTip(event, 'fs44', 112)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 113)" onmouseover="showTip(event, 'fs5', 113)" class="id">Symbol</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs44', 114)" onmouseover="showTip(event, 'fs44', 114)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 115)" onmouseover="showTip(event, 'fs7', 115)" class="prop">Date</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs45', 116)" onmouseover="showTip(event, 'fs45', 116)" class="id">Year</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs44', 117)" onmouseover="showTip(event, 'fs44', 117)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 118)" onmouseover="showTip(event, 'fs7', 118)" class="prop">Date</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs46', 119)" onmouseover="showTip(event, 'fs46', 119)" class="id">Month</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 120)" onmouseover="showTip(event, 'fs28', 120)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 121)" onmouseover="showTip(event, 'fs31', 121)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs24', 122)" onmouseover="showTip(event, 'fs24', 122)" class="id">symbol</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs47', 123)" onmouseover="showTip(event, 'fs47', 123)" class="id">_year</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs48', 124)" onmouseover="showTip(event, 'fs48', 124)" class="id">_month</span><span class="pn">)</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs49', 125)" onmouseover="showTip(event, 'fs49', 125)" class="fn">xs</span><span class="pn">)</span> <span class="k">-&gt;</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs52', 126)" onmouseover="showTip(event, 'fs52', 126)" class="fn">monthReturnPlus1</span> <span class="o">=</span> <span class="pn">(</span><span class="n">1.0</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs49', 127)" onmouseover="showTip(event, 'fs49', 127)" class="fn">xs</span><span class="pn">)</span> <span class="o">||&gt;</span> <span onmouseout="hideTip(event, 'fs28', 128)" onmouseover="showTip(event, 'fs28', 128)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs53', 129)" onmouseover="showTip(event, 'fs53', 129)" class="id">fold</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs54', 130)" onmouseover="showTip(event, 'fs54', 130)" class="fn">acc</span> <span onmouseout="hideTip(event, 'fs44', 131)" onmouseover="showTip(event, 'fs44', 131)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs54', 132)" onmouseover="showTip(event, 'fs54', 132)" class="fn">acc</span> <span class="o">*</span> <span class="pn">(</span><span class="n">1.0</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs44', 133)" onmouseover="showTip(event, 'fs44', 133)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 134)" onmouseover="showTip(event, 'fs9', 134)" class="id">Return</span><span class="pn">)</span><span class="pn">)</span>
+    <span class="pn">{</span> <span class="prop">Symbol</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 135)" onmouseover="showTip(event, 'fs24', 135)" class="fn">symbol</span> 
+      <span class="prop">Date</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 136)" onmouseover="showTip(event, 'fs49', 136)" class="fn">xs</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 137)" onmouseover="showTip(event, 'fs28', 137)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 138)" onmouseover="showTip(event, 'fs31', 138)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 139)" onmouseover="showTip(event, 'fs44', 139)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 140)" onmouseover="showTip(event, 'fs44', 140)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 141)" onmouseover="showTip(event, 'fs7', 141)" class="id">Date</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 142)" onmouseover="showTip(event, 'fs28', 142)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 143)" onmouseover="showTip(event, 'fs50', 143)" class="id">max</span> 
+      <span class="prop">Return</span> <span class="o">=</span>  <span onmouseout="hideTip(event, 'fs52', 144)" onmouseover="showTip(event, 'fs52', 144)" class="fn">monthReturnPlus1</span> <span class="o">-</span> <span class="n">1.0</span> <span class="pn">}</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.002, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val it : ReturnOb [] =
+  [|{ Symbol = "AAPL"
+      Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Sunday;
+                                   DayOfYear = 3;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 1;
+                                   Second = 0;
+                                   Ticks = 637452288000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Return = 0.1331495388 };
+    { Symbol = "AAPL"
+      Date = 2/3/2021 12:00:00 AM {Date = 2/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Wednesday;
+                                   DayOfYear = 34;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637479072000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Return = 0.02704464906 };
+    { Symbol = "TSLA"
+      Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Sunday;
+                                   DayOfYear = 3;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 1;
+                                   Second = 0;
+                                   Ticks = 637452288000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Return = -0.1609068633 };
+    { Symbol = "TSLA"
+      Date = 2/3/2021 12:00:00 AM {Date = 2/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Wednesday;
+                                   DayOfYear = 34;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637479072000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Return = 0.2013744809 }|]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-7" class="anchor" href="#Question-7">Question 7</a></h2>
+<p>Given <code>returns : ReturnOb []</code>, calculate the standard deviation of daily returns
+for every symbol each month.
+Give the result as a <code>ValueOb []</code> where the date in each <code>ValueOb</code> is the last date for the symbol
+each month.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs23', 145)" onmouseover="showTip(event, 'fs23', 145)" class="id">returns</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 146)" onmouseover="showTip(event, 'fs28', 146)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 147)" onmouseover="showTip(event, 'fs43', 147)" class="id">groupBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 148)" onmouseover="showTip(event, 'fs44', 148)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 149)" onmouseover="showTip(event, 'fs44', 149)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 150)" onmouseover="showTip(event, 'fs5', 150)" class="id">Symbol</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs44', 151)" onmouseover="showTip(event, 'fs44', 151)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 152)" onmouseover="showTip(event, 'fs7', 152)" class="prop">Date</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs45', 153)" onmouseover="showTip(event, 'fs45', 153)" class="id">Year</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs44', 154)" onmouseover="showTip(event, 'fs44', 154)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 155)" onmouseover="showTip(event, 'fs7', 155)" class="prop">Date</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs46', 156)" onmouseover="showTip(event, 'fs46', 156)" class="id">Month</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 157)" onmouseover="showTip(event, 'fs28', 157)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 158)" onmouseover="showTip(event, 'fs31', 158)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs24', 159)" onmouseover="showTip(event, 'fs24', 159)" class="id">symbol</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs47', 160)" onmouseover="showTip(event, 'fs47', 160)" class="id">_year</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs48', 161)" onmouseover="showTip(event, 'fs48', 161)" class="id">_month</span><span class="pn">)</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs49', 162)" onmouseover="showTip(event, 'fs49', 162)" class="fn">xs</span><span class="pn">)</span> <span class="k">-&gt;</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs55', 163)" onmouseover="showTip(event, 'fs55', 163)" class="fn">sd</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 164)" onmouseover="showTip(event, 'fs49', 164)" class="fn">xs</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs56', 165)" onmouseover="showTip(event, 'fs56', 165)" class="fn">stDevBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 166)" onmouseover="showTip(event, 'fs44', 166)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 167)" onmouseover="showTip(event, 'fs44', 167)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 168)" onmouseover="showTip(event, 'fs9', 168)" class="id">Return</span><span class="pn">)</span>
+    <span class="pn">{</span> <span class="prop">Symbol</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 169)" onmouseover="showTip(event, 'fs24', 169)" class="fn">symbol</span> 
+      <span class="prop">Date</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs49', 170)" onmouseover="showTip(event, 'fs49', 170)" class="fn">xs</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 171)" onmouseover="showTip(event, 'fs28', 171)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 172)" onmouseover="showTip(event, 'fs31', 172)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 173)" onmouseover="showTip(event, 'fs44', 173)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 174)" onmouseover="showTip(event, 'fs44', 174)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 175)" onmouseover="showTip(event, 'fs7', 175)" class="id">Date</span><span class="pn">)</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 176)" onmouseover="showTip(event, 'fs28', 176)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs50', 177)" onmouseover="showTip(event, 'fs50', 177)" class="id">max</span> 
+      <span class="prop">Value</span> <span class="o">=</span>  <span onmouseout="hideTip(event, 'fs55', 178)" onmouseover="showTip(event, 'fs55', 178)" class="fn">sd</span> <span class="pn">}</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.002, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val it : ValueOb [] =
+  [|{ Symbol = "AAPL"
+      Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Sunday;
+                                   DayOfYear = 3;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 1;
+                                   Second = 0;
+                                   Ticks = 637452288000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1241051372 };
+    { Symbol = "AAPL"
+      Date = 2/3/2021 12:00:00 AM {Date = 2/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Wednesday;
+                                   DayOfYear = 34;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637479072000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.106796419 };
+    { Symbol = "TSLA"
+      Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Sunday;
+                                   DayOfYear = 3;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 1;
+                                   Second = 0;
+                                   Ticks = 637452288000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.136976765 };
+    { Symbol = "TSLA"
+      Date = 2/3/2021 12:00:00 AM {Date = 2/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Wednesday;
+                                   DayOfYear = 34;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637479072000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.03113263046 }|]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+<h2><a name="Question-8" class="anchor" href="#Question-8">Question 8</a></h2>
+<p>Given <code>returns : ReturnOb []</code>, calculate the standard deviation of daily returns
+for every symbol using rolling 3 day windows.
+Give the result as a <code>ValueOb []</code> where the date in each <code>ValueOb</code> is the last date for the symbol
+in the window.</p>
+
+<div style="padding-left: 40px;">
+<p> 
+<span>
+<details>
+<summary><p style="display:inline">answer</p></summary>
+
+
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs23', 179)" onmouseover="showTip(event, 'fs23', 179)" class="id">returns</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 180)" onmouseover="showTip(event, 'fs28', 180)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 181)" onmouseover="showTip(event, 'fs43', 181)" class="id">groupBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 182)" onmouseover="showTip(event, 'fs44', 182)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 183)" onmouseover="showTip(event, 'fs44', 183)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 184)" onmouseover="showTip(event, 'fs5', 184)" class="id">Symbol</span><span class="pn">)</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 185)" onmouseover="showTip(event, 'fs28', 185)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 186)" onmouseover="showTip(event, 'fs29', 186)" class="id">collect</span><span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs57', 187)" onmouseover="showTip(event, 'fs57', 187)" class="id">_symbol</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs49', 188)" onmouseover="showTip(event, 'fs49', 188)" class="fn">xs</span><span class="pn">)</span> <span class="k">-&gt;</span>
+    <span onmouseout="hideTip(event, 'fs49', 189)" onmouseover="showTip(event, 'fs49', 189)" class="fn">xs</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 190)" onmouseover="showTip(event, 'fs28', 190)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs58', 191)" onmouseover="showTip(event, 'fs58', 191)" class="id">sortBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 192)" onmouseover="showTip(event, 'fs44', 192)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 193)" onmouseover="showTip(event, 'fs44', 193)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 194)" onmouseover="showTip(event, 'fs7', 194)" class="id">Date</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 195)" onmouseover="showTip(event, 'fs28', 195)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs59', 196)" onmouseover="showTip(event, 'fs59', 196)" class="id">windowed</span> <span class="n">3</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 197)" onmouseover="showTip(event, 'fs28', 197)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 198)" onmouseover="showTip(event, 'fs31', 198)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs60', 199)" onmouseover="showTip(event, 'fs60', 199)" class="fn">ys</span> <span class="k">-&gt;</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs61', 200)" onmouseover="showTip(event, 'fs61', 200)" class="fn">last</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs60', 201)" onmouseover="showTip(event, 'fs60', 201)" class="fn">ys</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 202)" onmouseover="showTip(event, 'fs28', 202)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs62', 203)" onmouseover="showTip(event, 'fs62', 203)" class="id">last</span> 
+        <span class="pn">{</span> <span class="prop">Symbol</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs61', 204)" onmouseover="showTip(event, 'fs61', 204)" class="fn">last</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 205)" onmouseover="showTip(event, 'fs5', 205)" class="id">Symbol</span>
+          <span class="prop">Date</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs61', 206)" onmouseover="showTip(event, 'fs61', 206)" class="fn">last</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 207)" onmouseover="showTip(event, 'fs7', 207)" class="id">Date</span>
+          <span class="prop">Value</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs60', 208)" onmouseover="showTip(event, 'fs60', 208)" class="fn">ys</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs56', 209)" onmouseover="showTip(event, 'fs56', 209)" class="fn">stDevBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 210)" onmouseover="showTip(event, 'fs44', 210)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 211)" onmouseover="showTip(event, 'fs44', 211)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 212)" onmouseover="showTip(event, 'fs9', 212)" class="id">Return</span><span class="pn">)</span><span class="pn">}</span><span class="pn">)</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.006, CPU: 00:00:00.015, GC gen0: 0, gen1: 0, gen2: 0
+val it : ValueOb [] =
+  [|{ Symbol = "AAPL"
+      Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Sunday;
+                                   DayOfYear = 3;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 1;
+                                   Second = 0;
+                                   Ticks = 637452288000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1241051372 };
+    { Symbol = "AAPL"
+      Date = 2/1/2021 12:00:00 AM {Date = 2/1/2021 12:00:00 AM;
+                                   Day = 1;
+                                   DayOfWeek = Monday;
+                                   DayOfYear = 32;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637477344000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1200377524 };
+    { Symbol = "AAPL"
+      Date = 2/2/2021 12:00:00 AM {Date = 2/2/2021 12:00:00 AM;
+                                   Day = 2;
+                                   DayOfWeek = Tuesday;
+                                   DayOfYear = 33;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637478208000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1401026193 };
+    { Symbol = "AAPL"
+      Date = 2/3/2021 12:00:00 AM {Date = 2/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Wednesday;
+                                   DayOfYear = 34;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637479072000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.106796419 };
+    { Symbol = "TSLA"
+      Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Sunday;
+                                   DayOfYear = 3;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 1;
+                                   Second = 0;
+                                   Ticks = 637452288000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.136976765 };
+    { Symbol = "TSLA"
+      Date = 2/1/2021 12:00:00 AM {Date = 2/1/2021 12:00:00 AM;
+                                   Day = 1;
+                                   DayOfWeek = Monday;
+                                   DayOfYear = 32;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637477344000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1107173508 };
+    { Symbol = "TSLA"
+      Date = 2/2/2021 12:00:00 AM {Date = 2/2/2021 12:00:00 AM;
+                                   Day = 2;
+                                   DayOfWeek = Tuesday;
+                                   DayOfYear = 33;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637478208000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1079983767 };
+    { Symbol = "TSLA"
+      Date = 2/3/2021 12:00:00 AM {Date = 2/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Wednesday;
+                                   DayOfYear = 34;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637479072000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.03113263046 }|]</code></pre></td></tr></table>
+<p>Breaking this answer down,
+If you're unsure, it's helpful to work through things step by step.
+then build up from there.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs63', 213)" onmouseover="showTip(event, 'fs63', 213)" class="id">groups</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs23', 214)" onmouseover="showTip(event, 'fs23', 214)" class="id">returns</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 215)" onmouseover="showTip(event, 'fs28', 215)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 216)" onmouseover="showTip(event, 'fs43', 216)" class="id">groupBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 217)" onmouseover="showTip(event, 'fs44', 217)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 218)" onmouseover="showTip(event, 'fs44', 218)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 219)" onmouseover="showTip(event, 'fs5', 219)" class="id">Symbol</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val groups : (string * ReturnOb []) [] =
+  [|("AAPL",
+     [|{ Symbol = "AAPL"
+         Date = 1/1/2021 12:00:00 AM
+         Return = -0.02993466474 }; { Symbol = "AAPL"
+                                      Date = 1/2/2021 12:00:00 AM
+                                      Return = -0.01872509079 };
+       { Symbol = "AAPL"
+         Date = 1/3/2021 12:00:00 AM
+         Return = 0.1904072042 }; { Symbol = "AAPL"
+                                    Date = 2/1/2021 12:00:00 AM
+                                    Return = -0.01626157984 };
+       { Symbol = "AAPL"
+         Date = 2/2/2021 12:00:00 AM
+         Return = -0.0767937252 }; { Symbol = "AAPL"
+                                     Date = 2/3/2021 12:00:00 AM
+                                     Return = 0.1308654699 }|]);
+    ("TSLA",
+     [|{ Symbol = "TSLA"
+         Date = 1/1/2021 12:00:00 AM
+         Return = -0.1487757845 }; { Symbol = "TSLA"
+                                     Date = 1/2/2021 12:00:00 AM
+                                     Return = 0.1059620976 };
+       { Symbol = "TSLA"
+         Date = 1/3/2021 12:00:00 AM
+         Return = -0.108695795 }; { Symbol = "TSLA"
+                                    Date = 2/1/2021 12:00:00 AM
+                                    Return = 0.04571273462 };
+       { Symbol = "TSLA"
+         Date = 2/2/2021 12:00:00 AM
+         Return = 0.099311576 }; { Symbol = "TSLA"
+                                   Date = 2/3/2021 12:00:00 AM
+                                   Return = 0.04506957545 }|])|]</code></pre></td></tr></table>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs64', 220)" onmouseover="showTip(event, 'fs64', 220)" class="id">firstGroup</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs63', 221)" onmouseover="showTip(event, 'fs63', 221)" class="id">groups</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 222)" onmouseover="showTip(event, 'fs28', 222)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs65', 223)" onmouseover="showTip(event, 'fs65', 223)" class="id">item</span> <span class="n">0</span> <span class="c">// or groups |&gt; Array.head</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs66', 224)" onmouseover="showTip(event, 'fs66', 224)" class="id">firstSymbol</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs67', 225)" onmouseover="showTip(event, 'fs67', 225)" class="id">firstObs</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs64', 226)" onmouseover="showTip(event, 'fs64', 226)" class="id">firstGroup</span> <span class="c">// like let a,b = (1,2)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs68', 227)" onmouseover="showTip(event, 'fs68', 227)" class="id">windowedFirstObs</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs67', 228)" onmouseover="showTip(event, 'fs67', 228)" class="id">firstObs</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 229)" onmouseover="showTip(event, 'fs28', 229)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs58', 230)" onmouseover="showTip(event, 'fs58', 230)" class="id">sortBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 231)" onmouseover="showTip(event, 'fs44', 231)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 232)" onmouseover="showTip(event, 'fs44', 232)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 233)" onmouseover="showTip(event, 'fs7', 233)" class="id">Date</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 234)" onmouseover="showTip(event, 'fs28', 234)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs59', 235)" onmouseover="showTip(event, 'fs59', 235)" class="id">windowed</span> <span class="n">3</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs69', 236)" onmouseover="showTip(event, 'fs69', 236)" class="id">firstWindow</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs68', 237)" onmouseover="showTip(event, 'fs68', 237)" class="id">windowedFirstObs</span><span class="id">.</span><span class="pn">[</span><span class="n">0</span><span class="pn">]</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs70', 238)" onmouseover="showTip(event, 'fs70', 238)" class="id">lastDayOfFirstWindow</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs69', 239)" onmouseover="showTip(event, 'fs69', 239)" class="id">firstWindow</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 240)" onmouseover="showTip(event, 'fs28', 240)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs62', 241)" onmouseover="showTip(event, 'fs62', 241)" class="id">last</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs71', 242)" onmouseover="showTip(event, 'fs71', 242)" class="id">firstWindowReturnStdDev</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs69', 243)" onmouseover="showTip(event, 'fs69', 243)" class="id">firstWindow</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs56', 244)" onmouseover="showTip(event, 'fs56', 244)" class="fn">stDevBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 245)" onmouseover="showTip(event, 'fs44', 245)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 246)" onmouseover="showTip(event, 'fs44', 246)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 247)" onmouseover="showTip(event, 'fs9', 247)" class="id">Return</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs72', 248)" onmouseover="showTip(event, 'fs72', 248)" class="id">firstWindowResult</span> <span class="o">=</span>
+    <span class="pn">{</span> <span class="prop">Symbol</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs70', 249)" onmouseover="showTip(event, 'fs70', 249)" class="id">lastDayOfFirstWindow</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 250)" onmouseover="showTip(event, 'fs5', 250)" class="id">Symbol</span> 
+      <span class="prop">Date</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs70', 251)" onmouseover="showTip(event, 'fs70', 251)" class="id">lastDayOfFirstWindow</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 252)" onmouseover="showTip(event, 'fs7', 252)" class="id">Date</span>
+      <span class="prop">Value</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs71', 253)" onmouseover="showTip(event, 'fs71', 253)" class="id">firstWindowReturnStdDev</span> <span class="pn">}</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.001, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val firstGroup : string * ReturnOb [] =
+  ("AAPL",
+   [|{ Symbol = "AAPL"
+       Date = 1/1/2021 12:00:00 AM
+       Return = -0.02993466474 }; { Symbol = "AAPL"
+                                    Date = 1/2/2021 12:00:00 AM
+                                    Return = -0.01872509079 };
+     { Symbol = "AAPL"
+       Date = 1/3/2021 12:00:00 AM
+       Return = 0.1904072042 }; { Symbol = "AAPL"
+                                  Date = 2/1/2021 12:00:00 AM
+                                  Return = -0.01626157984 };
+     { Symbol = "AAPL"
+       Date = 2/2/2021 12:00:00 AM
+       Return = -0.0767937252 }; { Symbol = "AAPL"
+                                   Date = 2/3/2021 12:00:00 AM
+                                   Return = 0.1308654699 }|])
+val firstSymbol : string = "AAPL"
+val firstObs : ReturnOb [] =
+  [|{ Symbol = "AAPL"
+      Date = 1/1/2021 12:00:00 AM
+      Return = -0.02993466474 }; { Symbol = "AAPL"
+                                   Date = 1/2/2021 12:00:00 AM
+                                   Return = -0.01872509079 };
+    { Symbol = "AAPL"
+      Date = 1/3/2021 12:00:00 AM
+      Return = 0.1904072042 }; { Symbol = "AAPL"
+                                 Date = 2/1/2021 12:00:00 AM
+                                 Return = -0.01626157984 };
+    { Symbol = "AAPL"
+      Date = 2/2/2021 12:00:00 AM
+      Return = -0.0767937252 }; { Symbol = "AAPL"
+                                  Date = 2/3/2021 12:00:00 AM
+                                  Return = 0.1308654699 }|]
+val windowedFirstObs : ReturnOb [] [] =
+  [|[|{ Symbol = "AAPL"
+        Date = 1/1/2021 12:00:00 AM
+        Return = -0.02993466474 }; { Symbol = "AAPL"
+                                     Date = 1/2/2021 12:00:00 AM
+                                     Return = -0.01872509079 };
+      { Symbol = "AAPL"
+        Date = 1/3/2021 12:00:00 AM
+        Return = 0.1904072042 }|];
+    [|{ Symbol = "AAPL"
+        Date = 1/2/2021 12:00:00 AM
+        Return = -0.01872509079 }; { Symbol = "AAPL"
+                                     Date = 1/3/2021 12:00:00 AM
+                                     Return = 0.1904072042 };
+      { Symbol = "AAPL"
+        Date = 2/1/2021 12:00:00 AM
+        Return = -0.01626157984 }|];
+    [|{ Symbol = "AAPL"
+        Date = 1/3/2021 12:00:00 AM
+        Return = 0.1904072042 }; { Symbol = "AAPL"
+                                   Date = 2/1/2021 12:00:00 AM
+                                   Return = -0.01626157984 };
+      { Symbol = "AAPL"
+        Date = 2/2/2021 12:00:00 AM
+        Return = -0.0767937252 }|];
+    [|{ Symbol = "AAPL"
+        Date = 2/1/2021 12:00:00 AM
+        Return = -0.01626157984 }; { Symbol = "AAPL"
+                                     Date = 2/2/2021 12:00:00 AM
+                                     Return = -0.0767937252 };
+      { Symbol = "AAPL"
+        Date = 2/3/2021 12:00:00 AM
+        Return = 0.1308654699 }|]|]
+val firstWindow : ReturnOb [] =
+  [|{ Symbol = "AAPL"
+      Date = 1/1/2021 12:00:00 AM
+      Return = -0.02993466474 }; { Symbol = "AAPL"
+                                   Date = 1/2/2021 12:00:00 AM
+                                   Return = -0.01872509079 };
+    { Symbol = "AAPL"
+      Date = 1/3/2021 12:00:00 AM
+      Return = 0.1904072042 }|]
+val lastDayOfFirstWindow : ReturnOb = { Symbol = "AAPL"
+                                        Date = 1/3/2021 12:00:00 AM
+                                        Return = 0.1904072042 }
+val firstWindowReturnStdDev : float = 0.1241051372
+val firstWindowResult : ValueOb = { Symbol = "AAPL"
+                                    Date = 1/3/2021 12:00:00 AM
+                                    Value = 0.1241051372 }</code></pre></td></tr></table>
+<p>Now take the inner-most code operating on a single window
+and make a function by copying and pasting inside a function.
+often using more general variable names</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs73', 254)" onmouseover="showTip(event, 'fs73', 254)" class="fn">resultForWindow</span> <span onmouseout="hideTip(event, 'fs74', 255)" onmouseover="showTip(event, 'fs74', 255)" class="fn">window</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs75', 256)" onmouseover="showTip(event, 'fs75', 256)" class="fn">lastDay</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs74', 257)" onmouseover="showTip(event, 'fs74', 257)" class="fn">window</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 258)" onmouseover="showTip(event, 'fs28', 258)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs62', 259)" onmouseover="showTip(event, 'fs62', 259)" class="id">last</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs76', 260)" onmouseover="showTip(event, 'fs76', 260)" class="fn">stddev</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs74', 261)" onmouseover="showTip(event, 'fs74', 261)" class="fn">window</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs56', 262)" onmouseover="showTip(event, 'fs56', 262)" class="fn">stDevBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 263)" onmouseover="showTip(event, 'fs44', 263)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 264)" onmouseover="showTip(event, 'fs44', 264)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 265)" onmouseover="showTip(event, 'fs9', 265)" class="id">Return</span><span class="pn">)</span>
+    <span class="pn">{</span> <span class="prop">Symbol</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs75', 266)" onmouseover="showTip(event, 'fs75', 266)" class="fn">lastDay</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 267)" onmouseover="showTip(event, 'fs5', 267)" class="id">Symbol</span> 
+      <span class="prop">Date</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs75', 268)" onmouseover="showTip(event, 'fs75', 268)" class="fn">lastDay</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 269)" onmouseover="showTip(event, 'fs7', 269)" class="id">Date</span>
+      <span class="prop">Value</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs76', 270)" onmouseover="showTip(event, 'fs76', 270)" class="fn">stddev</span> <span class="pn">}</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val resultForWindow : window:ReturnOb [] -&gt; ValueOb</code></pre></td></tr></table>
+<p>test it on your window</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs77', 271)" onmouseover="showTip(event, 'fs77', 271)" class="id">firstWindowFunctionResult</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs73', 272)" onmouseover="showTip(event, 'fs73', 272)" class="fn">resultForWindow</span> <span onmouseout="hideTip(event, 'fs69', 273)" onmouseover="showTip(event, 'fs69', 273)" class="id">firstWindow</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val firstWindowFunctionResult : ValueOb = { Symbol = "AAPL"
+                                            Date = 1/3/2021 12:00:00 AM
+                                            Value = 0.1241051372 }</code></pre></td></tr></table>
+<p>check</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs72', 274)" onmouseover="showTip(event, 'fs72', 274)" class="id">firstWindowResult</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs77', 275)" onmouseover="showTip(event, 'fs77', 275)" class="id">firstWindowFunctionResult</span> <span class="c">// evaluates to true</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val it : bool = true</code></pre></td></tr></table>
+<p>now a function to create the windows</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs78', 276)" onmouseover="showTip(event, 'fs78', 276)" class="fn">createWindows</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs79', 277)" onmouseover="showTip(event, 'fs79', 277)" class="fn">days</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs4', 278)" onmouseover="showTip(event, 'fs4', 278)" class="rt">ReturnOb</span> <span onmouseout="hideTip(event, 'fs80', 279)" onmouseover="showTip(event, 'fs80', 279)" class="rt">array</span><span class="pn">)</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs79', 280)" onmouseover="showTip(event, 'fs79', 280)" class="fn">days</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 281)" onmouseover="showTip(event, 'fs28', 281)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs58', 282)" onmouseover="showTip(event, 'fs58', 282)" class="id">sortBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs81', 283)" onmouseover="showTip(event, 'fs81', 283)" class="fn">day</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs81', 284)" onmouseover="showTip(event, 'fs81', 284)" class="fn">day</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 285)" onmouseover="showTip(event, 'fs7', 285)" class="id">Date</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 286)" onmouseover="showTip(event, 'fs28', 286)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs59', 287)" onmouseover="showTip(event, 'fs59', 287)" class="id">windowed</span> <span class="n">3</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val createWindows : days:ReturnOb array -&gt; ReturnOb [] []</code></pre></td></tr></table>
+<p>check</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">(</span><span onmouseout="hideTip(event, 'fs78', 288)" onmouseover="showTip(event, 'fs78', 288)" class="fn">createWindows</span> <span onmouseout="hideTip(event, 'fs67', 289)" onmouseover="showTip(event, 'fs67', 289)" class="id">firstObs</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs68', 290)" onmouseover="showTip(event, 'fs68', 290)" class="id">windowedFirstObs</span> <span class="c">// evaluates to true</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val it : bool = true</code></pre></td></tr></table>
+<p>so now we can do</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs67', 291)" onmouseover="showTip(event, 'fs67', 291)" class="id">firstObs</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs78', 292)" onmouseover="showTip(event, 'fs78', 292)" class="fn">createWindows</span>
+<span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 293)" onmouseover="showTip(event, 'fs28', 293)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 294)" onmouseover="showTip(event, 'fs31', 294)" class="id">map</span> <span onmouseout="hideTip(event, 'fs73', 295)" onmouseover="showTip(event, 'fs73', 295)" class="fn">resultForWindow</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val it : ValueOb [] =
+  [|{ Symbol = "AAPL"
+      Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Sunday;
+                                   DayOfYear = 3;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 1;
+                                   Second = 0;
+                                   Ticks = 637452288000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1241051372 };
+    { Symbol = "AAPL"
+      Date = 2/1/2021 12:00:00 AM {Date = 2/1/2021 12:00:00 AM;
+                                   Day = 1;
+                                   DayOfWeek = Monday;
+                                   DayOfYear = 32;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637477344000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1200377524 };
+    { Symbol = "AAPL"
+      Date = 2/2/2021 12:00:00 AM {Date = 2/2/2021 12:00:00 AM;
+                                   Day = 2;
+                                   DayOfWeek = Tuesday;
+                                   DayOfYear = 33;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637478208000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1401026193 };
+    { Symbol = "AAPL"
+      Date = 2/3/2021 12:00:00 AM {Date = 2/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Wednesday;
+                                   DayOfYear = 34;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637479072000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.106796419 }|]</code></pre></td></tr></table>
+<p>Cool, now first obs was the obs from the first group.
+we could do function to operate on a group.
+our group is a tuple of <code>(string,ReturnObs array)</code>.
+We're not going to use the <code>string</code> variable, so we'll preface it
+with <em> to let the compiler know we're leaving it out o purpose.
+the </em> is not necessary but it's good practice</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs82', 296)" onmouseover="showTip(event, 'fs82', 296)" class="fn">resultsForGroup</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs83', 297)" onmouseover="showTip(event, 'fs83', 297)" class="id">_symbol</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs84', 298)" onmouseover="showTip(event, 'fs84', 298)" class="fn">xs</span><span class="pn">)</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs84', 299)" onmouseover="showTip(event, 'fs84', 299)" class="fn">xs</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs78', 300)" onmouseover="showTip(event, 'fs78', 300)" class="fn">createWindows</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 301)" onmouseover="showTip(event, 'fs28', 301)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 302)" onmouseover="showTip(event, 'fs31', 302)" class="id">map</span> <span onmouseout="hideTip(event, 'fs73', 303)" onmouseover="showTip(event, 'fs73', 303)" class="fn">resultForWindow</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val resultsForGroup : _symbol:'a * xs:ReturnOb array -&gt; ValueOb []</code></pre></td></tr></table>
+<p>test it on the first group</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs82', 304)" onmouseover="showTip(event, 'fs82', 304)" class="fn">resultsForGroup</span> <span onmouseout="hideTip(event, 'fs64', 305)" onmouseover="showTip(event, 'fs64', 305)" class="id">firstGroup</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val it : ValueOb [] =
+  [|{ Symbol = "AAPL"
+      Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Sunday;
+                                   DayOfYear = 3;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 1;
+                                   Second = 0;
+                                   Ticks = 637452288000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1241051372 };
+    { Symbol = "AAPL"
+      Date = 2/1/2021 12:00:00 AM {Date = 2/1/2021 12:00:00 AM;
+                                   Day = 1;
+                                   DayOfWeek = Monday;
+                                   DayOfYear = 32;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637477344000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1200377524 };
+    { Symbol = "AAPL"
+      Date = 2/2/2021 12:00:00 AM {Date = 2/2/2021 12:00:00 AM;
+                                   Day = 2;
+                                   DayOfWeek = Tuesday;
+                                   DayOfYear = 33;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637478208000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1401026193 };
+    { Symbol = "AAPL"
+      Date = 2/3/2021 12:00:00 AM {Date = 2/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Wednesday;
+                                   DayOfYear = 34;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637479072000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.106796419 }|]</code></pre></td></tr></table>
+<p>now make the group and apply my
+group function to each group</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs85', 306)" onmouseover="showTip(event, 'fs85', 306)" class="id">resultsForEachGroup</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs23', 307)" onmouseover="showTip(event, 'fs23', 307)" class="id">returns</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 308)" onmouseover="showTip(event, 'fs28', 308)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 309)" onmouseover="showTip(event, 'fs43', 309)" class="id">groupBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 310)" onmouseover="showTip(event, 'fs44', 310)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 311)" onmouseover="showTip(event, 'fs44', 311)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 312)" onmouseover="showTip(event, 'fs5', 312)" class="id">Symbol</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 313)" onmouseover="showTip(event, 'fs28', 313)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 314)" onmouseover="showTip(event, 'fs31', 314)" class="id">map</span> <span onmouseout="hideTip(event, 'fs82', 315)" onmouseover="showTip(event, 'fs82', 315)" class="fn">resultsForGroup</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val resultsForEachGroup : ValueOb [] [] =
+  [|[|{ Symbol = "AAPL"
+        Date = 1/3/2021 12:00:00 AM
+        Value = 0.1241051372 }; { Symbol = "AAPL"
+                                  Date = 2/1/2021 12:00:00 AM
+                                  Value = 0.1200377524 };
+      { Symbol = "AAPL"
+        Date = 2/2/2021 12:00:00 AM
+        Value = 0.1401026193 }; { Symbol = "AAPL"
+                                  Date = 2/3/2021 12:00:00 AM
+                                  Value = 0.106796419 }|];
+    [|{ Symbol = "TSLA"
+        Date = 1/3/2021 12:00:00 AM
+        Value = 0.136976765 }; { Symbol = "TSLA"
+                                 Date = 2/1/2021 12:00:00 AM
+                                 Value = 0.1107173508 };
+      { Symbol = "TSLA"
+        Date = 2/2/2021 12:00:00 AM
+        Value = 0.1079983767 }; { Symbol = "TSLA"
+                                  Date = 2/3/2021 12:00:00 AM
+                                  Value = 0.03113263046 }|]|]</code></pre></td></tr></table>
+<p>Okay, but this is an array of <code>ValueOb arrays</code> (that's what <code>ValueOb [ ][ ]</code> means).
+What happened is that I had an array of groups, and then I transformed each group.
+so it's still one result per group. For instance</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs85', 316)" onmouseover="showTip(event, 'fs85', 316)" class="id">resultsForEachGroup</span><span class="id">.</span><span class="pn">[</span><span class="n">0</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val it : ValueOb [] =
+  [|{ Symbol = "AAPL"
+      Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Sunday;
+                                   DayOfYear = 3;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 1;
+                                   Second = 0;
+                                   Ticks = 637452288000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1241051372 };
+    { Symbol = "AAPL"
+      Date = 2/1/2021 12:00:00 AM {Date = 2/1/2021 12:00:00 AM;
+                                   Day = 1;
+                                   DayOfWeek = Monday;
+                                   DayOfYear = 32;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637477344000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1200377524 };
+    { Symbol = "AAPL"
+      Date = 2/2/2021 12:00:00 AM {Date = 2/2/2021 12:00:00 AM;
+                                   Day = 2;
+                                   DayOfWeek = Tuesday;
+                                   DayOfYear = 33;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637478208000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1401026193 };
+    { Symbol = "AAPL"
+      Date = 2/3/2021 12:00:00 AM {Date = 2/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Wednesday;
+                                   DayOfYear = 34;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637479072000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.106796419 }|]</code></pre></td></tr></table>
+<p>is the first group of results</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs85', 317)" onmouseover="showTip(event, 'fs85', 317)" class="id">resultsForEachGroup</span><span class="id">.</span><span class="pn">[</span><span class="n">1</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val it : ValueOb [] =
+  [|{ Symbol = "TSLA"
+      Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Sunday;
+                                   DayOfYear = 3;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 1;
+                                   Second = 0;
+                                   Ticks = 637452288000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.136976765 };
+    { Symbol = "TSLA"
+      Date = 2/1/2021 12:00:00 AM {Date = 2/1/2021 12:00:00 AM;
+                                   Day = 1;
+                                   DayOfWeek = Monday;
+                                   DayOfYear = 32;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637477344000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1107173508 };
+    { Symbol = "TSLA"
+      Date = 2/2/2021 12:00:00 AM {Date = 2/2/2021 12:00:00 AM;
+                                   Day = 2;
+                                   DayOfWeek = Tuesday;
+                                   DayOfYear = 33;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637478208000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.1079983767 };
+    { Symbol = "TSLA"
+      Date = 2/3/2021 12:00:00 AM {Date = 2/3/2021 12:00:00 AM;
+                                   Day = 3;
+                                   DayOfWeek = Wednesday;
+                                   DayOfYear = 34;
+                                   Hour = 0;
+                                   Kind = Unspecified;
+                                   Millisecond = 0;
+                                   Minute = 0;
+                                   Month = 2;
+                                   Second = 0;
+                                   Ticks = 637479072000000000L;
+                                   TimeOfDay = 00:00:00;
+                                   Year = 2021;}
+      Value = 0.03113263046 }|]</code></pre></td></tr></table>
+<p>is the second group. I don't want an array of arrays.
+I just want one array of value obs. So <code>concat</code> them.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs86', 318)" onmouseover="showTip(event, 'fs86', 318)" class="id">resultsForEachGroupConcatenated</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs85', 319)" onmouseover="showTip(event, 'fs85', 319)" class="id">resultsForEachGroup</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 320)" onmouseover="showTip(event, 'fs28', 320)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 321)" onmouseover="showTip(event, 'fs33', 321)" class="id">concat</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val resultsForEachGroupConcatenated : ValueOb [] =
+  [|{ Symbol = "AAPL"
+      Date = 1/3/2021 12:00:00 AM
+      Value = 0.1241051372 }; { Symbol = "AAPL"
+                                Date = 2/1/2021 12:00:00 AM
+                                Value = 0.1200377524 };
+    { Symbol = "AAPL"
+      Date = 2/2/2021 12:00:00 AM
+      Value = 0.1401026193 }; { Symbol = "AAPL"
+                                Date = 2/3/2021 12:00:00 AM
+                                Value = 0.106796419 };
+    { Symbol = "TSLA"
+      Date = 1/3/2021 12:00:00 AM
+      Value = 0.136976765 }; { Symbol = "TSLA"
+                               Date = 2/1/2021 12:00:00 AM
+                               Value = 0.1107173508 };
+    { Symbol = "TSLA"
+      Date = 2/2/2021 12:00:00 AM
+      Value = 0.1079983767 }; { Symbol = "TSLA"
+                                Date = 2/3/2021 12:00:00 AM
+                                Value = 0.03113263046 }|]</code></pre></td></tr></table>
+<p>what's the first thing in the array?</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs86', 322)" onmouseover="showTip(event, 'fs86', 322)" class="id">resultsForEachGroupConcatenated</span><span class="id">.</span><span class="pn">[</span><span class="n">0</span><span class="pn">]</span>  
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val it : ValueOb = { Symbol = "AAPL"
+                     Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                                  Day = 3;
+                                                  DayOfWeek = Sunday;
+                                                  DayOfYear = 3;
+                                                  Hour = 0;
+                                                  Kind = Unspecified;
+                                                  Millisecond = 0;
+                                                  Minute = 0;
+                                                  Month = 1;
+                                                  Second = 0;
+                                                  Ticks = 637452288000000000L;
+                                                  TimeOfDay = 00:00:00;
+                                                  Year = 2021;}
+                     Value = 0.1241051372 }</code></pre></td></tr></table>
+<p><code>Collect</code> does the <code>map</code> and <code>concat</code> in one step.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs87', 323)" onmouseover="showTip(event, 'fs87', 323)" class="id">resultsForEachGroupCollected</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs23', 324)" onmouseover="showTip(event, 'fs23', 324)" class="id">returns</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 325)" onmouseover="showTip(event, 'fs28', 325)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 326)" onmouseover="showTip(event, 'fs43', 326)" class="id">groupBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 327)" onmouseover="showTip(event, 'fs44', 327)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 328)" onmouseover="showTip(event, 'fs44', 328)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 329)" onmouseover="showTip(event, 'fs5', 329)" class="id">Symbol</span><span class="pn">)</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 330)" onmouseover="showTip(event, 'fs28', 330)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 331)" onmouseover="showTip(event, 'fs29', 331)" class="id">collect</span> <span onmouseout="hideTip(event, 'fs82', 332)" onmouseover="showTip(event, 'fs82', 332)" class="fn">resultsForGroup</span> 
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val resultsForEachGroupCollected : ValueOb [] =
+  [|{ Symbol = "AAPL"
+      Date = 1/3/2021 12:00:00 AM
+      Value = 0.1241051372 }; { Symbol = "AAPL"
+                                Date = 2/1/2021 12:00:00 AM
+                                Value = 0.1200377524 };
+    { Symbol = "AAPL"
+      Date = 2/2/2021 12:00:00 AM
+      Value = 0.1401026193 }; { Symbol = "AAPL"
+                                Date = 2/3/2021 12:00:00 AM
+                                Value = 0.106796419 };
+    { Symbol = "TSLA"
+      Date = 1/3/2021 12:00:00 AM
+      Value = 0.136976765 }; { Symbol = "TSLA"
+                               Date = 2/1/2021 12:00:00 AM
+                               Value = 0.1107173508 };
+    { Symbol = "TSLA"
+      Date = 2/2/2021 12:00:00 AM
+      Value = 0.1079983767 }; { Symbol = "TSLA"
+                                Date = 2/3/2021 12:00:00 AM
+                                Value = 0.03113263046 }|]</code></pre></td></tr></table>
+<p>check, this should evaluate to <code>true</code></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs86', 333)" onmouseover="showTip(event, 'fs86', 333)" class="id">resultsForEachGroupConcatenated</span><span class="id">.</span><span class="pn">[</span><span class="n">0</span><span class="pn">]</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs87', 334)" onmouseover="showTip(event, 'fs87', 334)" class="id">resultsForEachGroupCollected</span><span class="id">.</span><span class="pn">[</span><span class="n">0</span><span class="pn">]</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val it : bool = true</code></pre></td></tr></table>
+<p>why did I write the answer using an anonymous function instead of functions like this?
+I use reusable functions for something I'm going to use multiple times.
+If it's something I'll do once, and it's not too many lines, then I use
+the anonymous lambda function. As you get more experience, you can code using
+the type signatures to tell you what everything is. And I don't actually
+have to running it step by step.
+however, starting out especially, I think you'll find it helpful
+to kinda break things down like I did here.<br />
+Another way you can do it, similar to the first answer using
+an anonymous lambda function, but now we'll do it with fewer
+nested arrays by concatenating/collecting the windows
+into the parent array before doing the standard deviations.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs88', 335)" onmouseover="showTip(event, 'fs88', 335)" class="id">m2Groups</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs23', 336)" onmouseover="showTip(event, 'fs23', 336)" class="id">returns</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 337)" onmouseover="showTip(event, 'fs28', 337)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 338)" onmouseover="showTip(event, 'fs43', 338)" class="id">groupBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 339)" onmouseover="showTip(event, 'fs44', 339)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 340)" onmouseover="showTip(event, 'fs44', 340)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 341)" onmouseover="showTip(event, 'fs5', 341)" class="id">Symbol</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs89', 342)" onmouseover="showTip(event, 'fs89', 342)" class="id">m2GroupsOfWindows</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs88', 343)" onmouseover="showTip(event, 'fs88', 343)" class="id">m2Groups</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 344)" onmouseover="showTip(event, 'fs28', 344)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 345)" onmouseover="showTip(event, 'fs31', 345)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs24', 346)" onmouseover="showTip(event, 'fs24', 346)" class="fn">symbol</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs49', 347)" onmouseover="showTip(event, 'fs49', 347)" class="fn">xs</span><span class="pn">)</span> <span class="k">-&gt;</span> 
+        <span onmouseout="hideTip(event, 'fs49', 348)" onmouseover="showTip(event, 'fs49', 348)" class="fn">xs</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 349)" onmouseover="showTip(event, 'fs28', 349)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs58', 350)" onmouseover="showTip(event, 'fs58', 350)" class="id">sortBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 351)" onmouseover="showTip(event, 'fs44', 351)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 352)" onmouseover="showTip(event, 'fs44', 352)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 353)" onmouseover="showTip(event, 'fs7', 353)" class="id">Date</span><span class="pn">)</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 354)" onmouseover="showTip(event, 'fs28', 354)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs59', 355)" onmouseover="showTip(event, 'fs59', 355)" class="id">windowed</span> <span class="n">3</span>
+    <span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.001, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val m2Groups : (string * ReturnOb []) [] =
+  [|("AAPL",
+     [|{ Symbol = "AAPL"
+         Date = 1/1/2021 12:00:00 AM
+         Return = -0.02993466474 }; { Symbol = "AAPL"
+                                      Date = 1/2/2021 12:00:00 AM
+                                      Return = -0.01872509079 };
+       { Symbol = "AAPL"
+         Date = 1/3/2021 12:00:00 AM
+         Return = 0.1904072042 }; { Symbol = "AAPL"
+                                    Date = 2/1/2021 12:00:00 AM
+                                    Return = -0.01626157984 };
+       { Symbol = "AAPL"
+         Date = 2/2/2021 12:00:00 AM
+         Return = -0.0767937252 }; { Symbol = "AAPL"
+                                     Date = 2/3/2021 12:00:00 AM
+                                     Return = 0.1308654699 }|]);
+    ("TSLA",
+     [|{ Symbol = "TSLA"
+         Date = 1/1/2021 12:00:00 AM
+         Return = -0.1487757845 }; { Symbol = "TSLA"
+                                     Date = 1/2/2021 12:00:00 AM
+                                     Return = 0.1059620976 };
+       { Symbol = "TSLA"
+         Date = 1/3/2021 12:00:00 AM
+         Return = -0.108695795 }; { Symbol = "TSLA"
+                                    Date = 2/1/2021 12:00:00 AM
+                                    Return = 0.04571273462 };
+       { Symbol = "TSLA"
+         Date = 2/2/2021 12:00:00 AM
+         Return = 0.099311576 }; { Symbol = "TSLA"
+                                   Date = 2/3/2021 12:00:00 AM
+                                   Return = 0.04506957545 }|])|]
+val m2GroupsOfWindows : ReturnOb [] [] [] =
+  [|[|[|{ Symbol = "AAPL"
+          Date = 1/1/2021 12:00:00 AM
+          Return = -0.02993466474 }; { Symbol = "AAPL"
+                                       Date = 1/2/2021 12:00:00 AM
+                                       Return = -0.01872509079 };
+        { Symbol = "AAPL"
+          Date = 1/3/2021 12:00:00 AM
+          Return = 0.1904072042 }|];
+      [|{ Symbol = "AAPL"
+          Date = 1/2/2021 12:00:00 AM
+          Return = -0.01872509079 }; { Symbol = "AAPL"
+                                       Date = 1/3/2021 12:00:00 AM
+                                       Return = 0.1904072042 };
+        { Symbol = "AAPL"
+          Date = 2/1/2021 12:00:00 AM
+          Return = -0.01626157984 }|];
+      [|{ Symbol = "AAPL"
+          Date = 1/3/2021 12:00:00 AM
+          Return = 0.1904072042 }; { Symbol = "AAPL"
+                                     Date = 2/1/2021 12:00:00 AM
+                                     Return = -0.01626157984 };
+        { Symbol = "AAPL"
+          Date = 2/2/2021 12:00:00 AM
+          Return = -0.0767937252 }|];
+      [|{ Symbol = "AAPL"
+          Date = 2/1/2021 12:00:00 AM
+          Return = -0.01626157984 }; { Symbol = "AAPL"
+                                       Date = 2/2/2021 12:00:00 AM
+                                       Return = -0.0767937252 };
+        { Symbol = "AAPL"
+          Date = 2/3/2021 12:00:00 AM
+          Return = 0.1308654699 }|]|];
+    [|[|{ Symbol = "TSLA"
+          Date = 1/1/2021 12:00:00 AM
+          Return = -0.1487757845 }; { Symbol = "TSLA"
+                                      Date = 1/2/2021 12:00:00 AM
+                                      Return = 0.1059620976 };
+        { Symbol = "TSLA"
+          Date = 1/3/2021 12:00:00 AM
+          Return = -0.108695795 }|];
+      [|{ Symbol = "TSLA"
+          Date = 1/2/2021 12:00:00 AM
+          Return = 0.1059620976 }; { Symbol = "TSLA"
+                                     Date = 1/3/2021 12:00:00 AM
+                                     Return = -0.108695795 };
+        { Symbol = "TSLA"
+          Date = 2/1/2021 12:00:00 AM
+          Return = 0.04571273462 }|];
+      [|{ Symbol = "TSLA"
+          Date = 1/3/2021 12:00:00 AM
+          Return = -0.108695795 }; { Symbol = "TSLA"
+                                     Date = 2/1/2021 12:00:00 AM
+                                     Return = 0.04571273462 };
+        { Symbol = "TSLA"
+          Date = 2/2/2021 12:00:00 AM
+          Return = 0.099311576 }|];
+      [|{ Symbol = "TSLA"
+          Date = 2/1/2021 12:00:00 AM
+          Return = 0.04571273462 }; { Symbol = "TSLA"
+                                      Date = 2/2/2021 12:00:00 AM
+                                      Return = 0.099311576 };
+        { Symbol = "TSLA"
+          Date = 2/3/2021 12:00:00 AM
+          Return = 0.04506957545 }|]|]|]</code></pre></td></tr></table>
+<p>first group of windows</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs89', 356)" onmouseover="showTip(event, 'fs89', 356)" class="id">m2GroupsOfWindows</span><span class="id">.</span><span class="pn">[</span><span class="n">0</span><span class="pn">]</span>    
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val it : ReturnOb [] [] =
+  [|[|{ Symbol = "AAPL"
+        Date = 1/1/2021 12:00:00 AM {Date = 1/1/2021 12:00:00 AM;
+                                     Day = 1;
+                                     DayOfWeek = Friday;
+                                     DayOfYear = 1;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 1;
+                                     Second = 0;
+                                     Ticks = 637450560000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = -0.02993466474 };
+      { Symbol = "AAPL"
+        Date = 1/2/2021 12:00:00 AM {Date = 1/2/2021 12:00:00 AM;
+                                     Day = 2;
+                                     DayOfWeek = Saturday;
+                                     DayOfYear = 2;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 1;
+                                     Second = 0;
+                                     Ticks = 637451424000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = -0.01872509079 };
+      { Symbol = "AAPL"
+        Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                     Day = 3;
+                                     DayOfWeek = Sunday;
+                                     DayOfYear = 3;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 1;
+                                     Second = 0;
+                                     Ticks = 637452288000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = 0.1904072042 }|];
+    [|{ Symbol = "AAPL"
+        Date = 1/2/2021 12:00:00 AM {Date = 1/2/2021 12:00:00 AM;
+                                     Day = 2;
+                                     DayOfWeek = Saturday;
+                                     DayOfYear = 2;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 1;
+                                     Second = 0;
+                                     Ticks = 637451424000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = -0.01872509079 };
+      { Symbol = "AAPL"
+        Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                     Day = 3;
+                                     DayOfWeek = Sunday;
+                                     DayOfYear = 3;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 1;
+                                     Second = 0;
+                                     Ticks = 637452288000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = 0.1904072042 };
+      { Symbol = "AAPL"
+        Date = 2/1/2021 12:00:00 AM {Date = 2/1/2021 12:00:00 AM;
+                                     Day = 1;
+                                     DayOfWeek = Monday;
+                                     DayOfYear = 32;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 2;
+                                     Second = 0;
+                                     Ticks = 637477344000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = -0.01626157984 }|];
+    [|{ Symbol = "AAPL"
+        Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                     Day = 3;
+                                     DayOfWeek = Sunday;
+                                     DayOfYear = 3;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 1;
+                                     Second = 0;
+                                     Ticks = 637452288000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = 0.1904072042 };
+      { Symbol = "AAPL"
+        Date = 2/1/2021 12:00:00 AM {Date = 2/1/2021 12:00:00 AM;
+                                     Day = 1;
+                                     DayOfWeek = Monday;
+                                     DayOfYear = 32;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 2;
+                                     Second = 0;
+                                     Ticks = 637477344000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = -0.01626157984 };
+      { Symbol = "AAPL"
+        Date = 2/2/2021 12:00:00 AM {Date = 2/2/2021 12:00:00 AM;
+                                     Day = 2;
+                                     DayOfWeek = Tuesday;
+                                     DayOfYear = 33;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 2;
+                                     Second = 0;
+                                     Ticks = 637478208000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = -0.0767937252 }|];
+    [|{ Symbol = "AAPL"
+        Date = 2/1/2021 12:00:00 AM {Date = 2/1/2021 12:00:00 AM;
+                                     Day = 1;
+                                     DayOfWeek = Monday;
+                                     DayOfYear = 32;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 2;
+                                     Second = 0;
+                                     Ticks = 637477344000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = -0.01626157984 };
+      { Symbol = "AAPL"
+        Date = 2/2/2021 12:00:00 AM {Date = 2/2/2021 12:00:00 AM;
+                                     Day = 2;
+                                     DayOfWeek = Tuesday;
+                                     DayOfYear = 33;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 2;
+                                     Second = 0;
+                                     Ticks = 637478208000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = -0.0767937252 };
+      { Symbol = "AAPL"
+        Date = 2/3/2021 12:00:00 AM {Date = 2/3/2021 12:00:00 AM;
+                                     Day = 3;
+                                     DayOfWeek = Wednesday;
+                                     DayOfYear = 34;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 2;
+                                     Second = 0;
+                                     Ticks = 637479072000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = 0.1308654699 }|]|]</code></pre></td></tr></table>
+<p>second group of windows</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span onmouseout="hideTip(event, 'fs89', 357)" onmouseover="showTip(event, 'fs89', 357)" class="id">m2GroupsOfWindows</span><span class="id">.</span><span class="pn">[</span><span class="n">1</span><span class="pn">]</span>    
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val it : ReturnOb [] [] =
+  [|[|{ Symbol = "TSLA"
+        Date = 1/1/2021 12:00:00 AM {Date = 1/1/2021 12:00:00 AM;
+                                     Day = 1;
+                                     DayOfWeek = Friday;
+                                     DayOfYear = 1;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 1;
+                                     Second = 0;
+                                     Ticks = 637450560000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = -0.1487757845 };
+      { Symbol = "TSLA"
+        Date = 1/2/2021 12:00:00 AM {Date = 1/2/2021 12:00:00 AM;
+                                     Day = 2;
+                                     DayOfWeek = Saturday;
+                                     DayOfYear = 2;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 1;
+                                     Second = 0;
+                                     Ticks = 637451424000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = 0.1059620976 };
+      { Symbol = "TSLA"
+        Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                     Day = 3;
+                                     DayOfWeek = Sunday;
+                                     DayOfYear = 3;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 1;
+                                     Second = 0;
+                                     Ticks = 637452288000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = -0.108695795 }|];
+    [|{ Symbol = "TSLA"
+        Date = 1/2/2021 12:00:00 AM {Date = 1/2/2021 12:00:00 AM;
+                                     Day = 2;
+                                     DayOfWeek = Saturday;
+                                     DayOfYear = 2;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 1;
+                                     Second = 0;
+                                     Ticks = 637451424000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = 0.1059620976 };
+      { Symbol = "TSLA"
+        Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                     Day = 3;
+                                     DayOfWeek = Sunday;
+                                     DayOfYear = 3;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 1;
+                                     Second = 0;
+                                     Ticks = 637452288000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = -0.108695795 };
+      { Symbol = "TSLA"
+        Date = 2/1/2021 12:00:00 AM {Date = 2/1/2021 12:00:00 AM;
+                                     Day = 1;
+                                     DayOfWeek = Monday;
+                                     DayOfYear = 32;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 2;
+                                     Second = 0;
+                                     Ticks = 637477344000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = 0.04571273462 }|];
+    [|{ Symbol = "TSLA"
+        Date = 1/3/2021 12:00:00 AM {Date = 1/3/2021 12:00:00 AM;
+                                     Day = 3;
+                                     DayOfWeek = Sunday;
+                                     DayOfYear = 3;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 1;
+                                     Second = 0;
+                                     Ticks = 637452288000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = -0.108695795 };
+      { Symbol = "TSLA"
+        Date = 2/1/2021 12:00:00 AM {Date = 2/1/2021 12:00:00 AM;
+                                     Day = 1;
+                                     DayOfWeek = Monday;
+                                     DayOfYear = 32;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 2;
+                                     Second = 0;
+                                     Ticks = 637477344000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = 0.04571273462 };
+      { Symbol = "TSLA"
+        Date = 2/2/2021 12:00:00 AM {Date = 2/2/2021 12:00:00 AM;
+                                     Day = 2;
+                                     DayOfWeek = Tuesday;
+                                     DayOfYear = 33;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 2;
+                                     Second = 0;
+                                     Ticks = 637478208000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = 0.099311576 }|];
+    [|{ Symbol = "TSLA"
+        Date = 2/1/2021 12:00:00 AM {Date = 2/1/2021 12:00:00 AM;
+                                     Day = 1;
+                                     DayOfWeek = Monday;
+                                     DayOfYear = 32;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 2;
+                                     Second = 0;
+                                     Ticks = 637477344000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = 0.04571273462 };
+      { Symbol = "TSLA"
+        Date = 2/2/2021 12:00:00 AM {Date = 2/2/2021 12:00:00 AM;
+                                     Day = 2;
+                                     DayOfWeek = Tuesday;
+                                     DayOfYear = 33;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 2;
+                                     Second = 0;
+                                     Ticks = 637478208000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = 0.099311576 };
+      { Symbol = "TSLA"
+        Date = 2/3/2021 12:00:00 AM {Date = 2/3/2021 12:00:00 AM;
+                                     Day = 3;
+                                     DayOfWeek = Wednesday;
+                                     DayOfYear = 34;
+                                     Hour = 0;
+                                     Kind = Unspecified;
+                                     Millisecond = 0;
+                                     Minute = 0;
+                                     Month = 2;
+                                     Second = 0;
+                                     Ticks = 637479072000000000L;
+                                     TimeOfDay = 00:00:00;
+                                     Year = 2021;}
+        Return = 0.04506957545 }|]|]</code></pre></td></tr></table>
+<p>Now concatenate the windows.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs90', 358)" onmouseover="showTip(event, 'fs90', 358)" class="id">m2GroupsOfWindowsConcatenated</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs89', 359)" onmouseover="showTip(event, 'fs89', 359)" class="id">m2GroupsOfWindows</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 360)" onmouseover="showTip(event, 'fs28', 360)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 361)" onmouseover="showTip(event, 'fs33', 361)" class="id">concat</span>  
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val m2GroupsOfWindowsConcatenated : ReturnOb [] [] =
+  [|[|{ Symbol = "AAPL"
+        Date = 1/1/2021 12:00:00 AM
+        Return = -0.02993466474 }; { Symbol = "AAPL"
+                                     Date = 1/2/2021 12:00:00 AM
+                                     Return = -0.01872509079 };
+      { Symbol = "AAPL"
+        Date = 1/3/2021 12:00:00 AM
+        Return = 0.1904072042 }|];
+    [|{ Symbol = "AAPL"
+        Date = 1/2/2021 12:00:00 AM
+        Return = -0.01872509079 }; { Symbol = "AAPL"
+                                     Date = 1/3/2021 12:00:00 AM
+                                     Return = 0.1904072042 };
+      { Symbol = "AAPL"
+        Date = 2/1/2021 12:00:00 AM
+        Return = -0.01626157984 }|];
+    [|{ Symbol = "AAPL"
+        Date = 1/3/2021 12:00:00 AM
+        Return = 0.1904072042 }; { Symbol = "AAPL"
+                                   Date = 2/1/2021 12:00:00 AM
+                                   Return = -0.01626157984 };
+      { Symbol = "AAPL"
+        Date = 2/2/2021 12:00:00 AM
+        Return = -0.0767937252 }|];
+    [|{ Symbol = "AAPL"
+        Date = 2/1/2021 12:00:00 AM
+        Return = -0.01626157984 }; { Symbol = "AAPL"
+                                     Date = 2/2/2021 12:00:00 AM
+                                     Return = -0.0767937252 };
+      { Symbol = "AAPL"
+        Date = 2/3/2021 12:00:00 AM
+        Return = 0.1308654699 }|];
+    [|{ Symbol = "TSLA"
+        Date = 1/1/2021 12:00:00 AM
+        Return = -0.1487757845 }; { Symbol = "TSLA"
+                                    Date = 1/2/2021 12:00:00 AM
+                                    Return = 0.1059620976 };
+      { Symbol = "TSLA"
+        Date = 1/3/2021 12:00:00 AM
+        Return = -0.108695795 }|];
+    [|{ Symbol = "TSLA"
+        Date = 1/2/2021 12:00:00 AM
+        Return = 0.1059620976 }; { Symbol = "TSLA"
+                                   Date = 1/3/2021 12:00:00 AM
+                                   Return = -0.108695795 };
+      { Symbol = "TSLA"
+        Date = 2/1/2021 12:00:00 AM
+        Return = 0.04571273462 }|];
+    [|{ Symbol = "TSLA"
+        Date = 1/3/2021 12:00:00 AM
+        Return = -0.108695795 }; { Symbol = "TSLA"
+                                   Date = 2/1/2021 12:00:00 AM
+                                   Return = 0.04571273462 };
+      { Symbol = "TSLA"
+        Date = 2/2/2021 12:00:00 AM
+        Return = 0.099311576 }|];
+    [|{ Symbol = "TSLA"
+        Date = 2/1/2021 12:00:00 AM
+        Return = 0.04571273462 }; { Symbol = "TSLA"
+                                    Date = 2/2/2021 12:00:00 AM
+                                    Return = 0.099311576 };
+      { Symbol = "TSLA"
+        Date = 2/3/2021 12:00:00 AM
+        Return = 0.04506957545 }|]|]</code></pre></td></tr></table>
+<p>same as if I'd used collect instead of map and then concat</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs91', 362)" onmouseover="showTip(event, 'fs91', 362)" class="id">m2GroupsOfWindowsCollected</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs88', 363)" onmouseover="showTip(event, 'fs88', 363)" class="id">m2Groups</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 364)" onmouseover="showTip(event, 'fs28', 364)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs29', 365)" onmouseover="showTip(event, 'fs29', 365)" class="id">collect</span><span class="pn">(</span><span class="k">fun</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs24', 366)" onmouseover="showTip(event, 'fs24', 366)" class="fn">symbol</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs49', 367)" onmouseover="showTip(event, 'fs49', 367)" class="fn">xs</span><span class="pn">)</span> <span class="k">-&gt;</span> 
+        <span onmouseout="hideTip(event, 'fs49', 368)" onmouseover="showTip(event, 'fs49', 368)" class="fn">xs</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 369)" onmouseover="showTip(event, 'fs28', 369)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs58', 370)" onmouseover="showTip(event, 'fs58', 370)" class="id">sortBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 371)" onmouseover="showTip(event, 'fs44', 371)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 372)" onmouseover="showTip(event, 'fs44', 372)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 373)" onmouseover="showTip(event, 'fs7', 373)" class="id">Date</span><span class="pn">)</span>
+        <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 374)" onmouseover="showTip(event, 'fs28', 374)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs59', 375)" onmouseover="showTip(event, 'fs59', 375)" class="id">windowed</span> <span class="n">3</span> 
+    <span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val m2GroupsOfWindowsCollected : ReturnOb [] [] =
+  [|[|{ Symbol = "AAPL"
+        Date = 1/1/2021 12:00:00 AM
+        Return = -0.02993466474 }; { Symbol = "AAPL"
+                                     Date = 1/2/2021 12:00:00 AM
+                                     Return = -0.01872509079 };
+      { Symbol = "AAPL"
+        Date = 1/3/2021 12:00:00 AM
+        Return = 0.1904072042 }|];
+    [|{ Symbol = "AAPL"
+        Date = 1/2/2021 12:00:00 AM
+        Return = -0.01872509079 }; { Symbol = "AAPL"
+                                     Date = 1/3/2021 12:00:00 AM
+                                     Return = 0.1904072042 };
+      { Symbol = "AAPL"
+        Date = 2/1/2021 12:00:00 AM
+        Return = -0.01626157984 }|];
+    [|{ Symbol = "AAPL"
+        Date = 1/3/2021 12:00:00 AM
+        Return = 0.1904072042 }; { Symbol = "AAPL"
+                                   Date = 2/1/2021 12:00:00 AM
+                                   Return = -0.01626157984 };
+      { Symbol = "AAPL"
+        Date = 2/2/2021 12:00:00 AM
+        Return = -0.0767937252 }|];
+    [|{ Symbol = "AAPL"
+        Date = 2/1/2021 12:00:00 AM
+        Return = -0.01626157984 }; { Symbol = "AAPL"
+                                     Date = 2/2/2021 12:00:00 AM
+                                     Return = -0.0767937252 };
+      { Symbol = "AAPL"
+        Date = 2/3/2021 12:00:00 AM
+        Return = 0.1308654699 }|];
+    [|{ Symbol = "TSLA"
+        Date = 1/1/2021 12:00:00 AM
+        Return = -0.1487757845 }; { Symbol = "TSLA"
+                                    Date = 1/2/2021 12:00:00 AM
+                                    Return = 0.1059620976 };
+      { Symbol = "TSLA"
+        Date = 1/3/2021 12:00:00 AM
+        Return = -0.108695795 }|];
+    [|{ Symbol = "TSLA"
+        Date = 1/2/2021 12:00:00 AM
+        Return = 0.1059620976 }; { Symbol = "TSLA"
+                                   Date = 1/3/2021 12:00:00 AM
+                                   Return = -0.108695795 };
+      { Symbol = "TSLA"
+        Date = 2/1/2021 12:00:00 AM
+        Return = 0.04571273462 }|];
+    [|{ Symbol = "TSLA"
+        Date = 1/3/2021 12:00:00 AM
+        Return = -0.108695795 }; { Symbol = "TSLA"
+                                   Date = 2/1/2021 12:00:00 AM
+                                   Return = 0.04571273462 };
+      { Symbol = "TSLA"
+        Date = 2/2/2021 12:00:00 AM
+        Return = 0.099311576 }|];
+    [|{ Symbol = "TSLA"
+        Date = 2/1/2021 12:00:00 AM
+        Return = 0.04571273462 }; { Symbol = "TSLA"
+                                    Date = 2/2/2021 12:00:00 AM
+                                    Return = 0.099311576 };
+      { Symbol = "TSLA"
+        Date = 2/3/2021 12:00:00 AM
+        Return = 0.04506957545 }|]|]</code></pre></td></tr></table>
+<p>compare them</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs92', 376)" onmouseover="showTip(event, 'fs92', 376)" class="id">m2FirstConcatenated</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs90', 377)" onmouseover="showTip(event, 'fs90', 377)" class="id">m2GroupsOfWindowsConcatenated</span><span class="id">.</span><span class="pn">[</span><span class="n">0</span><span class="pn">]</span>    
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs93', 378)" onmouseover="showTip(event, 'fs93', 378)" class="id">m2FirstCollected</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs91', 379)" onmouseover="showTip(event, 'fs91', 379)" class="id">m2GroupsOfWindowsCollected</span><span class="id">.</span><span class="pn">[</span><span class="n">0</span><span class="pn">]</span>
+<span onmouseout="hideTip(event, 'fs93', 380)" onmouseover="showTip(event, 'fs93', 380)" class="id">m2FirstCollected</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs92', 381)" onmouseover="showTip(event, 'fs92', 381)" class="id">m2FirstConcatenated</span> <span class="c">// true. </span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.000, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val m2FirstConcatenated : ReturnOb [] =
+  [|{ Symbol = "AAPL"
+      Date = 1/1/2021 12:00:00 AM
+      Return = -0.02993466474 }; { Symbol = "AAPL"
+                                   Date = 1/2/2021 12:00:00 AM
+                                   Return = -0.01872509079 };
+    { Symbol = "AAPL"
+      Date = 1/3/2021 12:00:00 AM
+      Return = 0.1904072042 }|]
+val m2FirstCollected : ReturnOb [] =
+  [|{ Symbol = "AAPL"
+      Date = 1/1/2021 12:00:00 AM
+      Return = -0.02993466474 }; { Symbol = "AAPL"
+                                   Date = 1/2/2021 12:00:00 AM
+                                   Return = -0.01872509079 };
+    { Symbol = "AAPL"
+      Date = 1/3/2021 12:00:00 AM
+      Return = 0.1904072042 }|]
+val it : bool = true</code></pre></td></tr></table>
+<p>If they're not true, make sure they're sorted the same before you take the first obs.</p>
+<p>Now, standard deviations of the windows' returns</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs94', 382)" onmouseover="showTip(event, 'fs94', 382)" class="id">m2Result</span> <span class="o">=</span>
+    <span onmouseout="hideTip(event, 'fs91', 383)" onmouseover="showTip(event, 'fs91', 383)" class="id">m2GroupsOfWindowsCollected</span>
+    <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 384)" onmouseover="showTip(event, 'fs28', 384)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs31', 385)" onmouseover="showTip(event, 'fs31', 385)" class="id">map</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs74', 386)" onmouseover="showTip(event, 'fs74', 386)" class="fn">window</span> <span class="k">-&gt;</span> 
+        <span class="k">let</span> <span onmouseout="hideTip(event, 'fs75', 387)" onmouseover="showTip(event, 'fs75', 387)" class="fn">lastDay</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs74', 388)" onmouseover="showTip(event, 'fs74', 388)" class="fn">window</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs28', 389)" onmouseover="showTip(event, 'fs28', 389)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs62', 390)" onmouseover="showTip(event, 'fs62', 390)" class="id">last</span> 
+        <span class="pn">{</span> <span class="prop">Symbol</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs75', 391)" onmouseover="showTip(event, 'fs75', 391)" class="fn">lastDay</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 392)" onmouseover="showTip(event, 'fs5', 392)" class="id">Symbol</span>
+          <span class="prop">Date</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs75', 393)" onmouseover="showTip(event, 'fs75', 393)" class="fn">lastDay</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 394)" onmouseover="showTip(event, 'fs7', 394)" class="id">Date</span>
+          <span class="prop">Value</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs74', 395)" onmouseover="showTip(event, 'fs74', 395)" class="fn">window</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs56', 396)" onmouseover="showTip(event, 'fs56', 396)" class="fn">stDevBy</span><span class="pn">(</span><span class="k">fun</span> <span onmouseout="hideTip(event, 'fs44', 397)" onmouseover="showTip(event, 'fs44', 397)" class="fn">x</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'fs44', 398)" onmouseover="showTip(event, 'fs44', 398)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 399)" onmouseover="showTip(event, 'fs9', 399)" class="id">Return</span> <span class="pn">)</span><span class="pn">}</span><span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>Real: 00:00:00.001, CPU: 00:00:00.000, GC gen0: 0, gen1: 0, gen2: 0
+val m2Result : ValueOb [] =
+  [|{ Symbol = "AAPL"
+      Date = 1/3/2021 12:00:00 AM
+      Value = 0.1241051372 }; { Symbol = "AAPL"
+                                Date = 2/1/2021 12:00:00 AM
+                                Value = 0.1200377524 };
+    { Symbol = "AAPL"
+      Date = 2/2/2021 12:00:00 AM
+      Value = 0.1401026193 }; { Symbol = "AAPL"
+                                Date = 2/3/2021 12:00:00 AM
+                                Value = 0.106796419 };
+    { Symbol = "TSLA"
+      Date = 1/3/2021 12:00:00 AM
+      Value = 0.136976765 }; { Symbol = "TSLA"
+                               Date = 2/1/2021 12:00:00 AM
+                               Value = 0.1107173508 };
+    { Symbol = "TSLA"
+      Date = 2/2/2021 12:00:00 AM
+      Value = 0.1079983767 }; { Symbol = "TSLA"
+                                Date = 2/3/2021 12:00:00 AM
+                                Value = 0.03113263046 }|]</code></pre></td></tr></table>
+
+
+</details>
+</span>
+</p>
+</div>
+
+
+            <div class="fsdocs-tip" id="fs1">namespace System</div>
+<div class="fsdocs-tip" id="fs2">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="fsdocs-tip" id="fs3">namespace FSharp.Stats</div>
+<div class="fsdocs-tip" id="fs4">type ReturnOb =
+  { Symbol: string
+    Date: DateTime
+    Return: float }</div>
+<div class="fsdocs-tip" id="fs5">ReturnOb.Symbol: string</div>
+<div class="fsdocs-tip" id="fs6">Multiple items<br />val string : value:&#39;T -&gt; string<br /><em>&lt;summary&gt;Converts the argument to a string using &lt;c&gt;ToString&lt;/c&gt;.&lt;/summary&gt;<br />&lt;remarks&gt;For standard integer and floating point values the and any type that implements &lt;c&gt;IFormattable&lt;/c&gt;&lt;c&gt;ToString&lt;/c&gt; conversion uses &lt;c&gt;CultureInfo.InvariantCulture&lt;/c&gt;. &lt;/remarks&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted string.&lt;/returns&gt;</em><br /><br />--------------------<br />type string = String<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.String&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs7">ReturnOb.Date: DateTime</div>
+<div class="fsdocs-tip" id="fs8">Multiple items<br />[&lt;Struct&gt;]
+type DateTime =
+  new : year: int * month: int * day: int -&gt; unit + 10 overloads
+  member Add : value: TimeSpan -&gt; DateTime
+  member AddDays : value: float -&gt; DateTime
+  member AddHours : value: float -&gt; DateTime
+  member AddMilliseconds : value: float -&gt; DateTime
+  member AddMinutes : value: float -&gt; DateTime
+  member AddMonths : months: int -&gt; DateTime
+  member AddSeconds : value: float -&gt; DateTime
+  member AddTicks : value: int64 -&gt; DateTime
+  member AddYears : value: int -&gt; DateTime
+  ...<br /><em>&lt;summary&gt;Represents an instant in time, typically expressed as a date and time of day.&lt;/summary&gt;</em><br /><br />--------------------<br />DateTime ()<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(ticks: int64, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, calendar: Globalization.Calendar) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em><br />DateTime(year: int, month: int, day: int, hour: int, minute: int, second: int, millisecond: int, kind: DateTimeKind) : DateTime<br />&#160;&#160;&#160;<em>(+0 other overloads)</em></div>
+<div class="fsdocs-tip" id="fs9">ReturnOb.Return: float</div>
+<div class="fsdocs-tip" id="fs10">Multiple items<br />val float : value:&#39;T -&gt; float (requires member op_Explicit)<br /><em>&lt;summary&gt;Converts the argument to 64-bit float. This is a direct conversion for all 
+ primitive numeric types. For strings, the input is converted using &lt;c&gt;Double.Parse()&lt;/c&gt;  
+ with InvariantCulture settings. Otherwise the operation requires an appropriate
+ static conversion method on the input type.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted float&lt;/returns&gt;</em><br /><br />--------------------<br />[&lt;Struct&gt;]
+type float = Double<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />type float&lt;&#39;Measure&gt; =
+  float<br /><em>&lt;summary&gt;The type of double-precision floating point numbers, annotated with a unit of measure. 
+ The unit of measure is erased in compiled code and when values of this type
+ are analyzed using reflection. The type is representationally equivalent to 
+ &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category index=&quot;6&quot;&gt;Basic Types with Units of Measure&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs11">type ValueOb =
+  { Symbol: string
+    Date: DateTime
+    Value: float }</div>
+<div class="fsdocs-tip" id="fs12">ValueOb.Symbol: string</div>
+<div class="fsdocs-tip" id="fs13">ValueOb.Date: DateTime</div>
+<div class="fsdocs-tip" id="fs14">ValueOb.Value: float</div>
+<div class="fsdocs-tip" id="fs15">val seed : int</div>
+<div class="fsdocs-tip" id="fs16">Multiple items<br />type Random =
+  new : unit -&gt; unit + 1 overload
+  member Next : unit -&gt; int + 2 overloads
+  member NextBytes : buffer: byte [] -&gt; unit + 1 overload
+  member NextDouble : unit -&gt; float
+  member NextInt64 : unit -&gt; int64 + 2 overloads
+  member NextSingle : unit -&gt; float32
+  member Sample : unit -&gt; float
+  static member Shared : Random<br /><em>&lt;summary&gt;Represents a pseudo-random number generator, which is an algorithm that produces a sequence of numbers that meet certain statistical requirements for randomness.&lt;/summary&gt;</em><br /><br />--------------------<br />Random() : Random<br />Random(Seed: int) : Random</div>
+<div class="fsdocs-tip" id="fs17">val SetSampleGenerator : rg:Random.IRandom -&gt; unit<br /><em>&lt;summary&gt;
+ Sets the random number generator used for sampling.
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs18">Multiple items<br />type RandBasic =
+  interface IRandom
+  new : unit -&gt; RandBasic + 1 overload
+  val mutable rnd: Random<br /><br />--------------------<br />new : unit -&gt; Random.RandBasic<br />new : n:int -&gt; Random.RandBasic</div>
+<div class="fsdocs-tip" id="fs19">val normal : Distributions.Distribution&lt;float,float&gt;</div>
+<div class="fsdocs-tip" id="fs20">namespace FSharp.Stats.Distributions</div>
+<div class="fsdocs-tip" id="fs21">module Continuous
+
+from FSharp.Stats.Distributions</div>
+<div class="fsdocs-tip" id="fs22">val normal : mu:float -&gt; sigma:float -&gt; Distributions.Distribution&lt;float,float&gt;<br /><em>&lt;summary&gt;
+ Initializes a Normal distribution        
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs23">val returns : ReturnOb []</div>
+<div class="fsdocs-tip" id="fs24">val symbol : string</div>
+<div class="fsdocs-tip" id="fs25">val month : int</div>
+<div class="fsdocs-tip" id="fs26">val day : int</div>
+<div class="fsdocs-tip" id="fs27">abstract member Distributions.Distribution.Sample : unit -&gt; &#39;b</div>
+<div class="fsdocs-tip" id="fs28">type Array =
+  interface ICollection
+  interface IEnumerable
+  interface IList
+  interface IStructuralComparable
+  interface IStructuralEquatable
+  interface ICloneable
+  new : unit -&gt; unit
+  member Clone : unit -&gt; obj
+  member CopyTo : array: Array * index: int -&gt; unit + 1 overload
+  member GetEnumerator : unit -&gt; IEnumerator
+  ...<br /><em>&lt;summary&gt;Provides methods for creating, manipulating, searching, and sorting arrays, thereby serving as the base class for all arrays in the common language runtime.&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs29">val collect : mapping:(&#39;T -&gt; &#39;U []) -&gt; array:&#39;T [] -&gt; &#39;U []<br /><em>&lt;summary&gt;For each element of the array, applies the given function. Concatenates all the results and return the combined array.&lt;/summary&gt;<br />&lt;param name=&quot;mapping&quot;&gt;The function to create sub-arrays from the input array elements.&lt;/param&gt;<br />&lt;param name=&quot;array&quot;&gt;The input array.&lt;/param&gt;<br />&lt;returns&gt;The concatenation of the sub-arrays.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input array is null.&lt;/exception&gt;</em></div>
+<div class="fsdocs-tip" id="fs30">val xs : float []</div>
+<div class="fsdocs-tip" id="fs31">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U []<br /><em>&lt;summary&gt;Builds a new array whose elements are the results of applying the given function
+ to each of the elements of the array.&lt;/summary&gt;<br />&lt;param name=&quot;mapping&quot;&gt;The function to transform elements of the array.&lt;/param&gt;<br />&lt;param name=&quot;array&quot;&gt;The input array.&lt;/param&gt;<br />&lt;returns&gt;The array of transformed elements.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input array is null.&lt;/exception&gt;</em></div>
+<div class="fsdocs-tip" id="fs32">val x : float</div>
+<div class="fsdocs-tip" id="fs33">val concat : arrays:seq&lt;&#39;T []&gt; -&gt; &#39;T []<br /><em>&lt;summary&gt;Builds a new array that contains the elements of each of the given sequence of arrays.&lt;/summary&gt;<br />&lt;param name=&quot;arrays&quot;&gt;The input sequence of arrays.&lt;/param&gt;<br />&lt;returns&gt;The concatenation of the sequence of input arrays.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input sequence is null.&lt;/exception&gt;</em></div>
+<div class="fsdocs-tip" id="fs34">val add : x:int -&gt; y:int -&gt; int</div>
+<div class="fsdocs-tip" id="fs35">val x : int</div>
+<div class="fsdocs-tip" id="fs36">val y : int</div>
+<div class="fsdocs-tip" id="fs37">val add2 : (int -&gt; int)</div>
+<div class="fsdocs-tip" id="fs38">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><em>&lt;summary&gt;Print to &lt;c&gt;stdout&lt;/c&gt; using the given format, and add a newline.&lt;/summary&gt;<br />&lt;param name=&quot;format&quot;&gt;The formatter.&lt;/param&gt;<br />&lt;returns&gt;The formatted result.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs39">val xString : string</div>
+<div class="fsdocs-tip" id="fs40">val xBool : bool</div>
+<div class="fsdocs-tip" id="fs41">val xFloat : float</div>
+<div class="fsdocs-tip" id="fs42">val xInt : int</div>
+<div class="fsdocs-tip" id="fs43">val groupBy : projection:(&#39;T -&gt; &#39;Key) -&gt; array:&#39;T [] -&gt; (&#39;Key * &#39;T []) [] (requires equality)<br /><em>&lt;summary&gt;Applies a key-generating function to each element of an array and yields an array of 
+ unique keys. Each unique key contains an array of all elements that match 
+ to this key.&lt;/summary&gt;<br />&lt;param name=&quot;projection&quot;&gt;A function that transforms an element of the array into a comparable key.&lt;/param&gt;<br />&lt;param name=&quot;array&quot;&gt;The input array.&lt;/param&gt;<br />&lt;returns&gt;The result array.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input array is null.&lt;/exception&gt;</em></div>
+<div class="fsdocs-tip" id="fs44">val x : ReturnOb</div>
+<div class="fsdocs-tip" id="fs45">property DateTime.Year: int with get<br /><em>&lt;summary&gt;Gets the year component of the date represented by this instance.&lt;/summary&gt;<br />&lt;returns&gt;The year, between 1 and 9999.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs46">property DateTime.Month: int with get<br /><em>&lt;summary&gt;Gets the month component of the date represented by this instance.&lt;/summary&gt;<br />&lt;returns&gt;The month component, expressed as a value between 1 and 12.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs47">val _year : int</div>
+<div class="fsdocs-tip" id="fs48">val _month : int</div>
+<div class="fsdocs-tip" id="fs49">val xs : ReturnOb []</div>
+<div class="fsdocs-tip" id="fs50">val max : array:&#39;T [] -&gt; &#39;T (requires comparison)<br /><em>&lt;summary&gt;Returns the greatest of all elements of the array, compared via Operators.max on the function result.&lt;/summary&gt;<br />&lt;remarks&gt;Throws ArgumentException for empty arrays.&lt;/remarks&gt;<br />&lt;param name=&quot;array&quot;&gt;The input array.&lt;/param&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input array is null.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.ArgumentException&quot;&gt;Thrown when the input array is empty.&lt;/exception&gt;<br />&lt;returns&gt;The maximum element.&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs51">val averageBy : projection:(&#39;T -&gt; &#39;U) -&gt; array:&#39;T [] -&gt; &#39;U (requires member ( + ) and member DivideByInt and member get_Zero)<br /><em>&lt;summary&gt;Returns the average of the elements generated by applying the function to each element of the array.&lt;/summary&gt;<br />&lt;param name=&quot;projection&quot;&gt;The function to transform the array elements before averaging.&lt;/param&gt;<br />&lt;param name=&quot;array&quot;&gt;The input array.&lt;/param&gt;<br />&lt;exception cref=&quot;T:System.ArgumentException&quot;&gt;Thrown when &lt;c&gt;array&lt;/c&gt; is empty.&lt;/exception&gt;<br />&lt;returns&gt;The computed average.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input array is null.&lt;/exception&gt;</em></div>
+<div class="fsdocs-tip" id="fs52">val monthReturnPlus1 : float</div>
+<div class="fsdocs-tip" id="fs53">val fold : folder:(&#39;State -&gt; &#39;T -&gt; &#39;State) -&gt; state:&#39;State -&gt; array:&#39;T [] -&gt; &#39;State<br /><em>&lt;summary&gt;Applies a function to each element of the collection, threading an accumulator argument
+ through the computation. If the input function is &lt;c&gt;f&lt;/c&gt; and the elements are &lt;c&gt;i0...iN&lt;/c&gt; then computes 
+ &lt;c&gt;f (... (f s i0)...) iN&lt;/c&gt;&lt;/summary&gt;<br />&lt;param name=&quot;folder&quot;&gt;The function to update the state given the input elements.&lt;/param&gt;<br />&lt;param name=&quot;state&quot;&gt;The initial state.&lt;/param&gt;<br />&lt;param name=&quot;array&quot;&gt;The input array.&lt;/param&gt;<br />&lt;returns&gt;The final state.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input array is null.&lt;/exception&gt;</em></div>
+<div class="fsdocs-tip" id="fs54">val acc : float</div>
+<div class="fsdocs-tip" id="fs55">val sd : float</div>
+<div class="fsdocs-tip" id="fs56">val stDevBy : f:(&#39;T -&gt; &#39;a) -&gt; items:seq&lt;&#39;T&gt; -&gt; &#39;U (requires member ( - ) and member get_Zero and member DivideByInt and member ( + ) and member ( * ) and member ( + ) and member ( / ) and member Sqrt)<br /><em>&lt;summary&gt;
+   Computes the sample standard deviation
+ &lt;/summary&gt;<br />&lt;param name=&quot;f&quot;&gt;A function applied to transform each element of the sequence.&lt;/param&gt;<br />&lt;param name=&quot;items&quot;&gt;The input sequence.&lt;/param&gt;<br />&lt;remarks&gt;Returns NaN if data is empty or if any entry is NaN.&lt;/remarks&gt;<br />&lt;returns&gt;standard deviation of a sample (Bessel&#39;s correction by N-1)&lt;/returns&gt;</em></div>
+<div class="fsdocs-tip" id="fs57">val _symbol : string</div>
+<div class="fsdocs-tip" id="fs58">val sortBy : projection:(&#39;T -&gt; &#39;Key) -&gt; array:&#39;T [] -&gt; &#39;T [] (requires comparison)<br /><em>&lt;summary&gt;Sorts the elements of an array, using the given projection for the keys and returning a new array. 
+ Elements are compared using &lt;see cref=&quot;M:Microsoft.FSharp.Core.Operators.compare&quot; /&gt;.&lt;/summary&gt;<br />&lt;remarks&gt;This is not a stable sort, i.e. the original order of equal elements is not necessarily preserved. 
+ For a stable sort, consider using &lt;see cref=&quot;M:Microsoft.FSharp.Collections.SeqModule.Sort&quot; /&gt;.&lt;/remarks&gt;<br />&lt;param name=&quot;projection&quot;&gt;The function to transform array elements into the type that is compared.&lt;/param&gt;<br />&lt;param name=&quot;array&quot;&gt;The input array.&lt;/param&gt;<br />&lt;returns&gt;The sorted array.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input array is null.&lt;/exception&gt;</em></div>
+<div class="fsdocs-tip" id="fs59">val windowed : windowSize:int -&gt; array:&#39;T [] -&gt; &#39;T [] []<br /><em>&lt;summary&gt;Returns an array of sliding windows containing elements drawn from the input
+ array. Each window is returned as a fresh array.&lt;/summary&gt;<br />&lt;param name=&quot;windowSize&quot;&gt;The number of elements in each window.&lt;/param&gt;<br />&lt;param name=&quot;array&quot;&gt;The input array.&lt;/param&gt;<br />&lt;returns&gt;The result array.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input array is null.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.ArgumentException&quot;&gt;Thrown when windowSize is not positive.&lt;/exception&gt;</em></div>
+<div class="fsdocs-tip" id="fs60">val ys : ReturnOb []</div>
+<div class="fsdocs-tip" id="fs61">val last : ReturnOb</div>
+<div class="fsdocs-tip" id="fs62">val last : array:&#39;T [] -&gt; &#39;T<br /><em>&lt;summary&gt;Returns the last element of the array.&lt;/summary&gt;<br />&lt;param name=&quot;array&quot;&gt;The input array.&lt;/param&gt;<br />&lt;returns&gt;The last element of the array.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input array is null.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.ArgumentException&quot;&gt;Thrown when the input does not have any elements.&lt;/exception&gt;</em></div>
+<div class="fsdocs-tip" id="fs63">val groups : (string * ReturnOb []) []</div>
+<div class="fsdocs-tip" id="fs64">val firstGroup : string * ReturnOb []</div>
+<div class="fsdocs-tip" id="fs65">val item : index:int -&gt; array:&#39;T [] -&gt; &#39;T<br /><em>&lt;summary&gt;Gets an element from an array.&lt;/summary&gt;<br />&lt;param name=&quot;index&quot;&gt;The input index.&lt;/param&gt;<br />&lt;param name=&quot;array&quot;&gt;The input array.&lt;/param&gt;<br />&lt;returns&gt;The value of the array at the given index.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.NullReferenceException&quot;&gt;Thrown when the input array is null.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.IndexOutOfRangeException&quot;&gt;Thrown when the index is negative or the input array does not contain enough elements.&lt;/exception&gt;</em></div>
+<div class="fsdocs-tip" id="fs66">val firstSymbol : string</div>
+<div class="fsdocs-tip" id="fs67">val firstObs : ReturnOb []</div>
+<div class="fsdocs-tip" id="fs68">val windowedFirstObs : ReturnOb [] []</div>
+<div class="fsdocs-tip" id="fs69">val firstWindow : ReturnOb []</div>
+<div class="fsdocs-tip" id="fs70">val lastDayOfFirstWindow : ReturnOb</div>
+<div class="fsdocs-tip" id="fs71">val firstWindowReturnStdDev : float</div>
+<div class="fsdocs-tip" id="fs72">val firstWindowResult : ValueOb</div>
+<div class="fsdocs-tip" id="fs73">val resultForWindow : window:ReturnOb [] -&gt; ValueOb</div>
+<div class="fsdocs-tip" id="fs74">val window : ReturnOb []</div>
+<div class="fsdocs-tip" id="fs75">val lastDay : ReturnOb</div>
+<div class="fsdocs-tip" id="fs76">val stddev : float</div>
+<div class="fsdocs-tip" id="fs77">val firstWindowFunctionResult : ValueOb</div>
+<div class="fsdocs-tip" id="fs78">val createWindows : days:ReturnOb array -&gt; ReturnOb [] []</div>
+<div class="fsdocs-tip" id="fs79">val days : ReturnOb array</div>
+<div class="fsdocs-tip" id="fs80">type &#39;T array = &#39;T []<br /><em>&lt;summary&gt;Single dimensional, zero-based arrays, written &lt;c&gt;int[]&lt;/c&gt;, &lt;c&gt;string[]&lt;/c&gt; etc.&lt;/summary&gt;<br />&lt;remarks&gt;Use the values in the &lt;see cref=&quot;T:Microsoft.FSharp.Collections.ArrayModule&quot; /&gt; module to manipulate values 
+ of this type, or the notation &lt;c&gt;arr.[x]&lt;/c&gt; to get/set array
+ values.&lt;/remarks&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs81">val day : ReturnOb</div>
+<div class="fsdocs-tip" id="fs82">val resultsForGroup : _symbol:&#39;a * xs:ReturnOb array -&gt; ValueOb []</div>
+<div class="fsdocs-tip" id="fs83">val _symbol : &#39;a</div>
+<div class="fsdocs-tip" id="fs84">val xs : ReturnOb array</div>
+<div class="fsdocs-tip" id="fs85">val resultsForEachGroup : ValueOb [] []</div>
+<div class="fsdocs-tip" id="fs86">val resultsForEachGroupConcatenated : ValueOb []</div>
+<div class="fsdocs-tip" id="fs87">val resultsForEachGroupCollected : ValueOb []</div>
+<div class="fsdocs-tip" id="fs88">val m2Groups : (string * ReturnOb []) []</div>
+<div class="fsdocs-tip" id="fs89">val m2GroupsOfWindows : ReturnOb [] [] []</div>
+<div class="fsdocs-tip" id="fs90">val m2GroupsOfWindowsConcatenated : ReturnOb [] []</div>
+<div class="fsdocs-tip" id="fs91">val m2GroupsOfWindowsCollected : ReturnOb [] []</div>
+<div class="fsdocs-tip" id="fs92">val m2FirstConcatenated : ReturnOb []</div>
+<div class="fsdocs-tip" id="fs93">val m2FirstCollected : ReturnOb []</div>
+<div class="fsdocs-tip" id="fs94">val m2Result : ValueOb []</div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/Teaching/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/Teaching/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    </div>
+</body>
+
+</html>
